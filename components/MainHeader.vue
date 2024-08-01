@@ -170,12 +170,14 @@ onBeforeMount(() => {
             font-size: 14px;
 
             &>.dot {
-                height: 5px;
-                width: 5px;
+                height: 4px;
+                width: 4px;
                 background: var(--white);
 
                 transform: rotate(45deg);
-                border-radius: 40%;
+                border-radius: 10%;
+                
+                margin-bottom: 3px;
             }
 
         }

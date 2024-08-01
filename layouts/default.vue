@@ -3,9 +3,9 @@
         <div class="container">
             <MainHeader />
 
-
             <slot />
 
+            <LayoutFooter />
         </div>
     </div>
 </template>

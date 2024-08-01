@@ -1,6 +1,6 @@
 <template>
     <div class="block">
-        <div class="block__box">
+        <div class="block__box" style="padding: 20px;">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ОТЗЫВЫ</h3>
@@ -11,7 +11,7 @@
             </div>
             <div class="block__icons"></div>
         </div>
-        <div class="block__box">
+        <div class="block__box" style="padding: 20px;">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">МЕНЮ</h3>
@@ -23,6 +23,98 @@
             <div class="block__icons"></div>
         </div>
     </div>
+    <div class="block block--1">
+        <div class="block__box">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">БОНУСЫ</h3>
+                    <p class="block__subTitle">250 бонусов</p>
+                </div>
+
+                <UIIcon name="buy-crypto" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+    </div>
+    <div class="block block--1-5">
+        <div class="block__box box-1">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">ПРОМОКОДЫ</h3>
+                    <p class="block__subTitle">Ввести промокд</p>
+                </div>
+
+                <UIIcon name="ticket-discount" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+        <div class="block__box box-2">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">WI-FI</h3>
+                </div>
+
+                <UIIcon name="wifi" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+    </div>
+    <div class="block block--1">
+        <div class="block__box" style="padding: 20px;">
+            <div class="block__info block__info--waiter">
+
+                <div class="waiter">
+                    <img src="@/assets/images/woman.png" alt="">
+    
+                    <div class="block__info-text">
+                        <h3 class="block__title">ЕЛИЗАВЕТА</h3>
+                        <p class="block__subTitle">Ваш официант</p>
+                    </div>
+                </div>
+
+                <div class="block__buttons">
+                    <button class="call"><p>ПОЗВАТЬ ОФИЦИАНТА</p></button>
+                    <button class="tea"><p>Оставить чаевые</p></button>
+                </div>
+            </div>
+            <div class="block__icons"></div>
+        </div>
+    </div>
+    <div class="block block--1">
+        <div class="block__box">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">ОПЛАТА СЧЁТА</h3>
+                    <p class="block__subTitle">5590 рублей</p>
+                </div>
+
+                <UIIcon name="receipt-item" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="block__box">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">КОЛЕСО ФОРТУНЫ</h3>
+                </div>
+
+                <UIIcon name="share" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+        <div class="block__box">
+            <div class="block__info">
+                <div class="block__info-text">
+                    <h3 class="block__title">ПОДАРОК ДРУГУ</h3>
+                </div>
+
+                <UIIcon name="emoji-happy" />
+            </div>
+            <div class="block__icons"></div>
+        </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -30,8 +122,8 @@
     background: #FFFFFF4D;
     border: 1px solid #FFFFFF4D;
 
-    width: 45px;
-    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
 
     border-radius: 16px;
 
@@ -55,8 +147,24 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
+
+    &--1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
     
-    
+    &--1-5 {
+        display: flex;
+
+        .block__box {
+            &:first-child {
+                flex: 0 0 63%;
+            }
+            &:last-child {
+                flex: 1;
+            }
+        }
+
+    }
 
     &__box {
         background: #EBEBEB33;
@@ -69,7 +177,7 @@
         margin-right: -10px;
        }
 
-        padding: 20px;
+        padding: 32px 20px;
         
         backdrop-filter: blur(10px);
 
@@ -84,6 +192,22 @@
         width: 100%;
 
         justify-content: space-between;
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        &--waiter {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & > .waiter {
+            display: flex;
+            gap: 16px;
+        }
     }
 
     &__title {
@@ -100,6 +224,36 @@
         margin-top: 4px;
 
         font-family: 'Overpass';
+
+        color: #bbbcbc;
+    }
+
+    &__buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+
+        margin-top: 16px;
+
+        & > button {
+            padding: 8px 25px;
+
+            border-radius: 8px;
+
+            color: var(--white);
+
+            font-weight: 500;
+
+            border: 1px solid #FFFFFF0D;
+        }
+
+        & > .call {
+            background: #702BE1;
+        }
+
+        & > .tea {
+            
+        }
     }
 }
 </style>
