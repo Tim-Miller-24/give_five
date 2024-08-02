@@ -26,7 +26,7 @@
         </div>
 
         <div class="header__image-box">
-            <img :data-src="mainBg" v-lazy-load alt="">
+            <!-- <img :data-src="mainBg" v-lazy-load alt=""> -->
             <div class="gray-frame"></div>
         </div>
 
@@ -106,7 +106,7 @@ onBeforeMount(() => {
             background: transparent;
 
 
-            z-index: 100;
+            z-index: 2000;
 
             display: flex;
             justify-content: space-between;
@@ -184,18 +184,19 @@ onBeforeMount(() => {
     }
 
     &__image-box {
-        margin-left: -20px;
-        margin-right: -20px;
+        background: url('@/assets/images/header-banner-bg.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
 
-        &>img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            min-height: 100vh;
-            object-fit: cover;
+        min-height: 100vh;
+        width: 100vw;
 
-            z-index: 8;
-        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 8;
+
 
         &>.gray-frame {
             position: absolute;
