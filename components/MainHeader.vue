@@ -3,7 +3,7 @@
         <div class="header__bar">
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
                 <div class="header__bar-buttons_block">
-                    <UIIcon name="icon-user" class="icon-user"></UIIcon>
+                    <UIIcon @click="navigateTo('/lk')" name="icon-user"class="icon-user"></UIIcon>
                     <UIIcon name="icon-chat"></UIIcon>
                 </div>
 
