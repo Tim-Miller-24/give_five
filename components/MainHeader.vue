@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header" :class="props.extraClass">
         <div class="header__bar">
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
                 <div class="header__bar-buttons_block">
@@ -27,15 +27,22 @@
 
         <div class="header__image-box">
             <!-- <img :data-src="mainBg" v-lazy-load alt=""> -->
-            <div class="gray-frame"></div>
+            <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
-        <img src="@/assets/images/header-text.png" class="header__text" alt="">
+        <img src="@/assets/images/header-text.png" v-if="props.extraClass === 'index'" class="header__text" alt="">
     </div>
 </template>
 
 <script setup>
 import mainBg from '@/assets/images/header-banner-bg.png';
+
+const props = defineProps({
+    extraClass: {
+        type: String,
+        default: '',
+    }
+})
 
 const isScrolled = ref();
 
@@ -176,7 +183,7 @@ onBeforeMount(() => {
 
                 transform: rotate(45deg);
                 border-radius: 10%;
-                
+
                 margin-bottom: 3px;
             }
 
@@ -199,7 +206,7 @@ onBeforeMount(() => {
 
 
         &>.gray-frame {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
 
@@ -209,6 +216,11 @@ onBeforeMount(() => {
             background: #00000066;
 
             z-index: 10;
+            backdrop-filter: blur(20px);
+
+            &.index {
+                backdrop-filter: none;
+            }
         }
     }
 

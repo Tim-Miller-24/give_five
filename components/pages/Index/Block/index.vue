@@ -1,6 +1,6 @@
 <template>
     <div class="block">
-        <div class="block__box" style="padding: 20px;">
+        <NuxtLink class="block__box" to="/feedback" style="padding: 20px;">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ОТЗЫВЫ</h3>
@@ -10,8 +10,8 @@
                 <UIIcon name="heart" />
             </div>
             <div class="block__icons"></div>
-        </div>
-        <div class="block__box" style="padding: 20px;">
+        </NuxtLink>
+        <NuxtLink class="block__box" style="padding: 20px;">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">МЕНЮ</h3>
@@ -21,10 +21,10 @@
                 <UIIcon name="book" />
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
     <div class="block block--1">
-        <div class="block__box">
+        <NuxtLink class="block__box">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">БОНУСЫ</h3>
@@ -34,10 +34,10 @@
                 <UIIcon name="buy-crypto" />
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
     <div class="block block--1-5">
-        <div class="block__box box-1">
+        <NuxtLink class="block__box box-1">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ПРОМОКОДЫ</h3>
@@ -47,8 +47,8 @@
                 <UIIcon name="ticket-discount" />
             </div>
             <div class="block__icons"></div>
-        </div>
-        <div class="block__box box-2">
+        </NuxtLink>
+        <NuxtLink class="block__box box-2">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">WI-FI</h3>
@@ -57,10 +57,10 @@
                 <UIIcon name="wifi" />
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
     <div class="block block--1">
-        <div class="block__box" style="padding: 20px;">
+        <NuxtLink class="block__box" style="padding: 20px;">
             <div class="block__info block__info--waiter">
 
                 <div class="waiter">
@@ -78,10 +78,10 @@
                 </div>
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
     <div class="block block--1">
-        <div class="block__box">
+        <NuxtLink class="block__box">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ОПЛАТА СЧЁТА</h3>
@@ -91,10 +91,10 @@
                 <UIIcon name="receipt-item" />
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
     <div class="block">
-        <div class="block__box">
+        <NuxtLink class="block__box">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">КОЛЕСО ФОРТУНЫ</h3>
@@ -103,8 +103,8 @@
                 <UIIcon name="share" />
             </div>
             <div class="block__icons"></div>
-        </div>
-        <div class="block__box">
+        </NuxtLink>
+        <NuxtLink class="block__box">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ПОДАРОК ДРУГУ</h3>
@@ -113,7 +113,7 @@
                 <UIIcon name="emoji-happy" />
             </div>
             <div class="block__icons"></div>
-        </div>
+        </NuxtLink>
     </div>
 </template>
 
