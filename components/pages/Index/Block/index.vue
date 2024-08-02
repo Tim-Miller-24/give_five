@@ -48,7 +48,7 @@
             </div>
             <div class="block__icons"></div>
         </NuxtLink>
-        <NuxtLink class="block__box box-2">
+        <NuxtLink to="/wifi" class="block__box box-2">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">WI-FI</h3>
@@ -248,7 +248,7 @@
         }
 
         & > .call {
-            background: #702BE1;
+            background: var(--purple);
         }
 
         & > .tea {
