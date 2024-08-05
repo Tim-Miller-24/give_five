@@ -104,7 +104,7 @@
             </div>
             <div class="block__icons"></div>
         </NuxtLink>
-        <NuxtLink class="block__box">
+        <NuxtLink class="block__box" to="/present">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ПОДАРОК ДРУГУ</h3>
