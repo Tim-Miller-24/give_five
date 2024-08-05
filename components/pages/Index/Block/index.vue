@@ -81,7 +81,7 @@
         </NuxtLink>
     </div>
     <div class="block block--1">
-        <NuxtLink class="block__box">
+        <NuxtLink class="block__box" to="/payments">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ОПЛАТА СЧЁТА</h3>

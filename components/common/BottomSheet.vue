@@ -101,8 +101,11 @@ const onDragEnd = () => {
     if (props.isModalMap) {
       setSheetHeight(90);
     }
+    else if (props.isQr) {
+      setSheetHeight(70);
+    }
     else {
-      setSheetHeight(100)
+      setSheetHeight(90)
     }
     isFullscreen.value = true
   } else {
@@ -113,7 +116,7 @@ const onDragEnd = () => {
 
 onMounted(() => {
   if (props.isOrder) {
-    setSheetHeight(100);
+    setSheetHeight(90);
     isFullscreen.value = true;
   }
   if (props.isQr) {
@@ -126,10 +129,21 @@ onMounted(() => {
   window.addEventListener('touchmove', onDragMove)
   window.addEventListener('mouseup', onDragEnd)
   window.addEventListener('touchend', onDragEnd)
+
+  nextTick(() => {
+    if (process.client) {
+      document.body.classList.add('overflow-hidden')
+    }
+  })
 })
 
 watch(sheetHeight, (newValue) => {
   if (newValue <= 0) {
+    nextTick(() => {
+      if (process.client) {
+        document.body.classList.remove('overflow-hidden')
+      }
+    })
     emits('closeModal');
   }  
 });
@@ -168,6 +182,10 @@ watch(sheetHeight, (newValue) => {
         overflow-y: auto;
       }
     }
+  }
+
+  &__content {
+    overflow-y: auto;
   }
 
   &--autoheight {
