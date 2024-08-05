@@ -8,71 +8,18 @@
         </div>
 
         <div class="payments__content">
-            <PagesPaymentsComposition @changeComposition="isCompositionModalOpened = true" />
+            <PagesTeaAmount />
 
             <PagesPaymentsMethods />
 
-            <PagesPaymentsAgreements :condition-text="`Я согласен взять на себя эквайринговую комиссию
-            2 ₽ за оплату счета`" />
+            <PagesPaymentsAgreements
+                :condition-text="`Я хочу компенсировать эквайринговую комиссию 8 ₽, чтобы покрыть издержки на перевод средств сотруднику`" />
         </div>
-
-        <CommonBottomSheet :isOrder="true" v-if="isCompositionModalOpened"
-            @closeModal="isCompositionModalOpened = false">
-            <div class="composition-modal">
-                <div class="composition-modal__header">
-                    <h3>Вы можете разделить счет</h3>
-                    <p>Выберите блюда за которые хотите заплатить</p>
-                </div>
-
-                <CommonOrderComposition />
-
-                <div class="composition-modal__footer">
-                    <button class="apply">Применить</button>
-
-                    <button class="share" @click="isSharingModalOpened = true">Поделиться счетом
-                        <UIIcon name="card" />
-                    </button>
-                </div>
-            </div>
-        </CommonBottomSheet>
-
-        <CommonBottomSheet v-if="isSharingModalOpened" :isQr="true" @closeModal="isSharingModalOpened = false">
-            <div class="sharing">
-                <div class="sharing__header">
-                    <h3 class="sharing__title">Поделиться счетом</h3>
-                    <p class="sharing__subTitle">Отправьте ссылку на оплату счета</p>
-                </div>
-
-                <div class="sharing__block">
-                    <div class="sharing__apps">
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/vk.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/ok.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/tg.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/Google.png" alt="">
-                        </div>
-                    </div>
-
-                    <div class="sharing__button button-share">
-                        Скопировать ссылку
-                        <UIIcon name="link" />
-                    </div>
-                </div>
-            </div>
-        </CommonBottomSheet>
     </div>
 </template>
 
 <script setup>
-const isCompositionModalOpened = ref(false);
 
-const isSharingModalOpened = ref(false);
 </script>
 
 <style lang="scss" scoped>

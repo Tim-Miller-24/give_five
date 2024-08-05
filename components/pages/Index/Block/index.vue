@@ -74,7 +74,7 @@
 
                 <div class="block__buttons">
                     <button class="call"><p>ПОЗВАТЬ ОФИЦИАНТА</p></button>
-                    <button class="tea"><p>Оставить чаевые</p></button>
+                    <button class="tea"><NuxtLink to="/tea">Оставить чаевые</NuxtLink></button>
                 </div>
             </div>
             <div class="block__icons"></div>

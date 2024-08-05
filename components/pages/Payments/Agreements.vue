@@ -1,6 +1,9 @@
 <template>
     <div class="agreements">
-        <UICheckbox :isAlignStart="true" class="agreements__checkbox"> Я согласен взять на себя эквайринговую комиссию 2 ₽ за оплату счета </UICheckbox>
+        <UICheckbox v-if="props.conditionText"
+        :isAlignStart="true" class="agreements__checkbox"> 
+            {{ props.conditionText }}
+        </UICheckbox>
         <UICheckbox :isAlignStart="true" class="agreements__checkbox"> Согласен с условиями
             <br>
             <NuxtLink to="/" class="agreements__link">
@@ -10,14 +13,19 @@
             <NuxtLink to="/" class="agreements__link">
                 Политика обработки персональных данных
             </NuxtLink>
-            
+
         </UICheckbox>
 
     </div>
 </template>
 
 <script setup>
-
+const props = defineProps({
+    conditionText: {
+        type: String,
+        default: '',
+    }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -27,7 +35,7 @@
     background: #EBEBEB33;
 
     border: 1px solid #FFFFFF0D;
-    border-radius: 16px;
+    border-radius: 12px;
 
     display: flex;
     flex-direction: column;
@@ -39,7 +47,7 @@
     gap: 24px;
 
     font-family: 'Overpass';
-    
+
     &__checkbox {
         display: flex;
         align-content: start;

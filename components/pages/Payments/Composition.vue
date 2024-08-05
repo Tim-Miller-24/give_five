@@ -36,7 +36,7 @@ const emits = defineEmits(['changeComposition'])
     background: #EBEBEB33;
 
     border: 1px solid #FFFFFF0D;
-    border-radius: 16px;
+    border-radius: 12px;
 
     font-family: 'Overpass';
 
