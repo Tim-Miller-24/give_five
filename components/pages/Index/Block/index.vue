@@ -37,7 +37,7 @@
         </NuxtLink>
     </div>
     <div class="block block--1-5">
-        <NuxtLink class="block__box box-1">
+        <NuxtLink class="block__box box-1" to="/promocodes">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ПРОМОКОДЫ</h3>

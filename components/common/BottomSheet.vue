@@ -42,6 +42,10 @@ const props = defineProps({
   isOrder: {
     type: Boolean,
     default: false,
+  },
+  isQr: {
+    type: Boolean,
+    default: false,
   }
 })
 
@@ -51,7 +55,6 @@ const START_HEIGHT_WITHOUT_LOCATION = 25
 
 const emits = defineEmits(['closeModal']);
 
-console.log('*********', props.autoHeight);
 const draggableButton = ref(null)
 const dragPosition = ref(null)
 const sheetHeight = ref(props.autoHeight ? START_HEIGHT : START_HEIGHT_WITHOUT_LOCATION)
@@ -111,6 +114,10 @@ const onDragEnd = () => {
 onMounted(() => {
   if (props.isOrder) {
     setSheetHeight(100);
+    isFullscreen.value = true;
+  }
+  if (props.isQr) {
+    setSheetHeight(70);
     isFullscreen.value = true;
   }
   draggableButton.value.addEventListener('mousedown', onDragStart)
