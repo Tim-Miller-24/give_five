@@ -296,7 +296,7 @@ const closeStory = () => {
     position: relative;
     z-index: 50;
 
-    margin-bottom: -20px !important;
+    // margin-bottom: -20px !important;
 
     margin-left: -16px;
     margin-right: -16px;
