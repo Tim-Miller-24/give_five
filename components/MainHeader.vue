@@ -165,7 +165,7 @@ onBeforeMount(() => {
             left: 0;
             right: 0;
 
-            z-index: 100;
+            z-index: 1500;
 
 
             margin-top: 10px;
