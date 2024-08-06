@@ -88,16 +88,16 @@ const isDisabled = computed(() => {
     padding: 6px 15px;
   }
 
-  &--yellow {
-    background: var(--yellow);
+  &--purple {
+    background: var(--purple);
 
     &:hover {
-      background: var(--yellowDark);
+      background: var(--purple2);
     }
 
     &:disabled {
       color: rgba(0, 0, 0, 0.30);
-      background: var(--yellowLight);
+      background: var(--purple3);
     }
   }
 
