@@ -36,6 +36,7 @@ const emits = defineEmits(['share'])
     font-family: 'Overpass';
 
     &>img {
+        width: 100%;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
     }
