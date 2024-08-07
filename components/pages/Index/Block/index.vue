@@ -94,7 +94,7 @@
         </NuxtLink>
     </div>
     <div class="block">
-        <NuxtLink class="block__box">
+        <NuxtLink class="block__box" to="/wheel">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">КОЛЕСО ФОРТУНЫ</h3>
