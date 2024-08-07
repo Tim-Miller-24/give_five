@@ -3,14 +3,17 @@
         <div class="header__bar">
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
                 <div class="header__bar-buttons_block">
-                    <UIIcon @click="navigateTo('/lk')" name="icon-user"class="icon-user"></UIIcon>
+                    <UIIcon @click="navigateTo('/lk')" name="icon-user" class="icon-user"></UIIcon>
                     <UIIcon name="icon-chat"></UIIcon>
                 </div>
 
                 <h1 class="header__title">ДАЙ 5</h1>
 
                 <div class="header__bar-buttons_block">
-                    <UIIcon name="icon-notification"></UIIcon>
+                    <NuxtLink to="/lk/Notifications">
+                        <UIIcon name="icon-notification"></UIIcon>
+                    </NuxtLink>
+
                     <div class="coins">
                         <span> 250 </span>
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>

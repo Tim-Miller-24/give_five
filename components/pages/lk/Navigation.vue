@@ -1,40 +1,40 @@
 <template>
     <div class="navigation">
-        <div class="navigation__block">
+        <NuxtLink to="/lk/Notifications" class="navigation__block">
             <UIIcon class="icon" name="icon-notification" />
 
             <p class="navigation__name">Уведомления</p>
 
             <span class="navigation__notification">2</span>
-        </div>
-        <div class="navigation__block">
+        </NuxtLink>
+        <NuxtLink class="navigation__block">
             <UIIcon class="icon" name="ticket-discount" />
 
             <p class="navigation__name">Реферальная система</p>
 
             <!-- <span class="navigation__notification">2</span> -->
-        </div>
-        <div class="navigation__block">
+        </NuxtLink>
+        <NuxtLink class="navigation__block">
             <UIIcon class="icon" name="discount-circle" />
 
             <p class="navigation__name">Промокоды и акции</p>
 
             <!-- <span class="navigation__notification">2</span> -->
-        </div>
-        <div class="navigation__block">
+        </NuxtLink>
+        <NuxtLink class="navigation__block">
             <UIIcon class="icon" name="receipt-item" />
 
             <p class="navigation__name">История оплаты</p>
 
             <!-- <span class="navigation__notification">2</span> -->
-        </div>
-        <div class="navigation__block">
+        </NuxtLink>
+        <NuxtLink class="navigation__block">
             <UIIcon class="icon" name="like-tag" />
 
             <p class="navigation__name">Промокоды и акции</p>
 
             <!-- <span class="navigation__notification">2</span> -->
-        </div>
+        </NuxtLink>
     </div>
 </template>
 

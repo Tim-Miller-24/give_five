@@ -76,7 +76,7 @@ const isDisabled = computed(() => {
 
   background: none;
   border: 0;
-  border-radius: 14px;
+  border-radius: 8px;
 
   transition: background-color 0.3s;
 
@@ -110,7 +110,7 @@ const isDisabled = computed(() => {
   }
 
   &--gray {
-    background: var(--grayBg);
+    border: 1px solid #FFFFFF0D;
 
     &:hover:enabled {
       background: var(--grayBg2);
