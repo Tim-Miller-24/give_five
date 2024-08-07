@@ -21,7 +21,7 @@
 
             <!-- <span class="navigation__notification">2</span> -->
         </NuxtLink>
-        <NuxtLink class="navigation__block">
+        <NuxtLink class="navigation__block" to="/lk/PaymentsHistory">
             <UIIcon class="icon" name="receipt-item" />
 
             <p class="navigation__name">История оплаты</p>

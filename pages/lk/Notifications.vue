@@ -1,7 +1,7 @@
 <template>
     <div class="notifications">
         <div class="notifications__title">
-            <NuxtLink to="/">
+            <NuxtLink to="/lk">
                 <UIIcon class="ui-icon" name="arrow-left" />
             </NuxtLink>
             <h3>уведомления</h3>
@@ -63,7 +63,7 @@ const temp3 = {
 const selectedButton = ref('all');
 
 watch(() => selectedButton.value, () => {
-    
+
 })
 </script>
 
