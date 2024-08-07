@@ -167,6 +167,7 @@
 }
 
 .payments {
+    position: relative;
 
     &__title {
         display: flex;

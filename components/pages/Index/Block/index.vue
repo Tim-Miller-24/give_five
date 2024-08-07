@@ -60,7 +60,7 @@
         </NuxtLink>
     </div>
     <div class="block block--1">
-        <NuxtLink class="block__box" style="padding: 20px;">
+        <div class="block__box" style="padding: 20px;">
             <div class="block__info block__info--waiter">
 
                 <div class="waiter">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="block__icons"></div>
-        </NuxtLink>
+        </div>
     </div>
     <div class="block block--1">
         <NuxtLink class="block__box" to="/payments">

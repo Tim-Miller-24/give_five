@@ -7,14 +7,14 @@
                     <UIIcon name="icon-chat"></UIIcon>
                 </div>
 
-                <h1 class="header__title">ДАЙ 5</h1>
+                <h1 class="header__title" @click="navigateTo('/')">ДАЙ 5</h1>
 
                 <div class="header__bar-buttons_block">
                     <NuxtLink to="/lk/Notifications">
                         <UIIcon name="icon-notification"></UIIcon>
                     </NuxtLink>
 
-                    <div class="coins">
+                    <div class="coins" @click="navigateTo('/bonuses')">
                         <span> 250 </span>
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>
                     </div>

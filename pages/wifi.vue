@@ -16,7 +16,8 @@
 
 <style lang="scss" scoped>
 .wifi {
-
+    position: relative;
+    
     &__title {
         display: flex;
 

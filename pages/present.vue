@@ -134,6 +134,7 @@ const isSharingModalOpened = ref(false);
     }
 }
 .present {
+    position: relative;
 
     &__title {
         display: flex;

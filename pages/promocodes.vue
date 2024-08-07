@@ -41,7 +41,8 @@ const isQrOpened = ref(false)
 
 <style lang="scss" scoped>
 .promocodes {
-
+    position: relative;
+    
     &__title {
         display: flex;
 

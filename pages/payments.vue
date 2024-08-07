@@ -220,6 +220,7 @@ const isSharingModalOpened = ref(false);
 }
 
 .payments {
+    position: relative;
 
     &__title {
         display: flex;

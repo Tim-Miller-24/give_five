@@ -16,6 +16,7 @@
 
 <style lang="scss" scoped>
 .feedback {
+    position: relative;
 
     &__title {
         display: flex;

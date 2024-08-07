@@ -11,29 +11,21 @@
             <UIIcon class="icon" name="ticket-discount" />
 
             <p class="navigation__name">Реферальная система</p>
-
-            <!-- <span class="navigation__notification">2</span> -->
         </NuxtLink>
-        <NuxtLink class="navigation__block">
+        <NuxtLink class="navigation__block" to="/promocodes">
             <UIIcon class="icon" name="discount-circle" />
 
             <p class="navigation__name">Промокоды и акции</p>
-
-            <!-- <span class="navigation__notification">2</span> -->
         </NuxtLink>
         <NuxtLink class="navigation__block" to="/lk/PaymentsHistory">
             <UIIcon class="icon" name="receipt-item" />
 
             <p class="navigation__name">История оплаты</p>
-
-            <!-- <span class="navigation__notification">2</span> -->
         </NuxtLink>
         <NuxtLink class="navigation__block">
             <UIIcon class="icon" name="like-tag" />
 
             <p class="navigation__name">Промокоды и акции</p>
-
-            <!-- <span class="navigation__notification">2</span> -->
         </NuxtLink>
     </div>
 </template>
