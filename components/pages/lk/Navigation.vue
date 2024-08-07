@@ -1,29 +1,33 @@
 <template>
     <div class="navigation">
         <NuxtLink to="/lk/Notifications" class="navigation__block">
-            <UIIcon class="icon" name="icon-notification" />
+            <UIIcon class="ui-icon" color="white" name="icon-notification" />
 
             <p class="navigation__name">Уведомления</p>
 
             <span class="navigation__notification">2</span>
         </NuxtLink>
-        <NuxtLink class="navigation__block">
-            <UIIcon class="icon" name="ticket-discount" />
+
+        <NuxtLink class="navigation__block" to="/lk/Referals">
+            <UIIcon class="ui-icon" color="white" name="ticket-discount" />
 
             <p class="navigation__name">Реферальная система</p>
         </NuxtLink>
+
         <NuxtLink class="navigation__block" to="/promocodes">
-            <UIIcon class="icon" name="discount-circle" />
+            <UIIcon class="ui-icon" color="white" name="discount-circle" />
 
             <p class="navigation__name">Промокоды и акции</p>
         </NuxtLink>
+
         <NuxtLink class="navigation__block" to="/lk/PaymentsHistory">
-            <UIIcon class="icon" name="receipt-item" />
+            <UIIcon class="ui-icon" color="white" name="receipt-item" />
 
             <p class="navigation__name">История оплаты</p>
         </NuxtLink>
+
         <NuxtLink class="navigation__block">
-            <UIIcon class="icon" name="like-tag" />
+            <UIIcon class="ui-icon" color="white" name="like-tag" />
 
             <p class="navigation__name">Промокоды и акции</p>
         </NuxtLink>
@@ -33,8 +37,14 @@
 <script setup></script>
 
 <style lang="scss">
-:deep(.icon) svg path {
-    fill: var(--white);
+:deep(.ui-icon) svg path {
+    fill: var(--white) !important;
+}
+
+.ui-icon {
+    :deep svg path {
+        fill: var(--white) !important;
+    }
 }
 
 .navigation {
@@ -63,6 +73,10 @@
         width: 100%;
 
         padding: 12px 16px;
+
+        :deep(.ui-icon) svg path {
+            fill: var(--white) !important;
+        }
     }
 
     &__name {

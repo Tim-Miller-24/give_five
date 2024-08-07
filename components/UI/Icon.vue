@@ -1,7 +1,7 @@
 <template>
   <span
     class="ui-icon"
-    :class="{ 'ui-icon--fill': filled }"
+    :class="[{ 'ui-icon--fill': filled }, color]"
     v-html="icon"
   />
 </template>
@@ -16,6 +16,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  color: {
+    type: String,
+    default: ''
+  }
 })
 
 const icon = ref('')
@@ -50,6 +54,12 @@ watchEffect(async () => {
 
   &--fill {
     fill: currentColor !important;
+  }
+  
+  &.white {
+    :deep svg path {
+      fill: var(--white);
+    }
   }
 }
 </style>
