@@ -29,11 +29,11 @@
         </div>
 
         <div class="header__image-box">
-            <img :data-src="mainBg" v-lazy-load alt="" :key="'main-bg'">
+            <img :src="mainBg" :loading="'lazy'" alt="" :key="'main-bg'">
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
-        <img :data-src="bgText" v-lazy-load :key="'bg-text'" v-if="props.extraClass === 'index'" class="header__text" alt="">
+        <img :src="bgText" :loading="'lazy'" :key="'bg-text'" v-if="props.extraClass === 'index'" class="header__text" alt="">
     </div>
 </template>
 

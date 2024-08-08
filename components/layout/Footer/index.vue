@@ -13,6 +13,10 @@
 .footer {
     display: flex;
 
+    position: relative;
+
+    z-index: 15;
+
     margin-top: 30px !important;
 
     padding-bottom: 30px !important;
