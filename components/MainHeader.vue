@@ -53,7 +53,7 @@ const props = defineProps({
 const isScrolled = ref();
 
 const userScroll = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 20) {
         isScrolled.value = true;
     } else {
         isScrolled.value = false
