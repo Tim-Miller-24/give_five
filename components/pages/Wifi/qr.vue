@@ -1,12 +1,16 @@
 <template>
     <div class="qr">
-        <img src="@/assets/images/wifi-qr.png" alt="">
+        <img :data-src="image" alt="" v-lazy-load>
 
         <h3 class="qr__title">Мы будем рады поделиться <br> wi-fi с вами</h3>
     </div>
 </template>
 
-<script></script>
+<script lang="ts" setup>
+const commonStore = useCommonStore();
+
+const image = computed(() => commonStore.dai5.wifi_qr);
+</script>
 
 <style lang="scss" scoped>
 .qr {

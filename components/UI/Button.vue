@@ -68,7 +68,9 @@ const isDisabled = computed(() => {
   grid-gap: 10px;
 
   min-width: 80px;
-  height: 48px;
+  height: 42px;
+
+  font-family: 'Overpass';
 
   padding: 12px 15px;
 
@@ -112,6 +114,14 @@ const isDisabled = computed(() => {
   &--gray {
     border: 1px solid #FFFFFF0D;
 
+    &:hover:enabled {
+      background: var(--grayBg2);
+    }
+  }
+  &--gray2 {
+    border: 1px solid #FFFFFF4D;
+    background: #FFFFFF4D;
+    
     &:hover:enabled {
       background: var(--grayBg2);
     }

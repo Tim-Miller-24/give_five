@@ -7,6 +7,9 @@
 </template>
 
 <script setup lang="ts">
+const catalogStore = useCatalogStore();
+const commonStore = useCommonStore();
+
 useHead({
   link: [
     { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/zuck.css" }, 
@@ -16,4 +19,14 @@ useHead({
     { src: 'https://unpkg.com/zuck.js/dist/zuck.js' },
   ]
 });
+
+commonStore.loadSettings();
+catalogStore.getCatalog();
+
+commonStore.getPickups();
+commonStore.getDelivery();
+commonStore.getDeliveryTimes();
+
+commonStore.getContacts();
+
 </script>

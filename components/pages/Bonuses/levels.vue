@@ -33,7 +33,7 @@ const price1 = 1300;
 const price2 = 2000;
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .icon svg path {
     fill: var(--white);
 }

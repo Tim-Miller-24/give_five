@@ -13,9 +13,9 @@
 .footer {
     display: flex;
 
-    margin-top: 30px;
+    margin-top: 30px !important;
 
-    padding-bottom: 30px;
+    padding-bottom: 30px !important;
 
     flex-direction: column;
 

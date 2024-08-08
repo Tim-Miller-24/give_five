@@ -11,13 +11,22 @@
         </div>
 
 
-        <button class="user__back-btn">Выйти</button>
+        <button class="user__back-btn" @click="logout">Выйти</button>
     </div>
 </template>
 
-<script></script>
+<script setup lang="ts">
+const userStore = useUserStore();
 
-<style lang="scss">
+const logout = () => {
+  navigateTo('/')
+
+  userStore.setToken(null)
+  userStore.setUser(null)
+}
+</script>
+
+<style lang="scss" scoped>
 .user {
     margin-top: 16px;
     position: relative;

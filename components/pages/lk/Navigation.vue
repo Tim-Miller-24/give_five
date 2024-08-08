@@ -14,7 +14,7 @@
             <p class="navigation__name">Реферальная система</p>
         </NuxtLink>
 
-        <NuxtLink class="navigation__block" to="/promocodes">
+        <NuxtLink class="navigation__block" to="/lk/promocodes">
             <UIIcon class="ui-icon" color="white" name="discount-circle" />
 
             <p class="navigation__name">Промокоды и акции</p>
@@ -36,7 +36,7 @@
 
 <script setup></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 :deep(.ui-icon) svg path {
     fill: var(--white) !important;
 }

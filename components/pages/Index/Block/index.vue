@@ -11,7 +11,7 @@
             </div>
             <div class="block__icons"></div>
         </NuxtLink>
-        <NuxtLink class="block__box" style="padding: 20px;">
+        <NuxtLink class="block__box" style="padding: 20px;" @click="onMenuClick">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">МЕНЮ</h3>
@@ -24,7 +24,7 @@
         </NuxtLink>
     </div>
     <div class="block block--1">
-        <NuxtLink class="block__box" to="/bonuses">
+        <NuxtLink class="block__box" to="/lk/bonuses">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">БОНУСЫ</h3>
@@ -37,7 +37,7 @@
         </NuxtLink>
     </div>
     <div class="block block--1-5">
-        <NuxtLink class="block__box box-1" to="/promocodes">
+        <NuxtLink class="block__box box-1" to="/lk/promocodes">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">ПРОМОКОДЫ</h3>
@@ -94,7 +94,7 @@
         </NuxtLink>
     </div>
     <div class="block">
-        <NuxtLink class="block__box" to="/wheel">
+        <NuxtLink class="block__box" to="/lk/wheel">
             <div class="block__info">
                 <div class="block__info-text">
                     <h3 class="block__title">КОЛЕСО ФОРТУНЫ</h3>
@@ -116,6 +116,20 @@
         </NuxtLink>
     </div>
 </template>
+
+<script setup lang="ts">
+const commonStore = useCommonStore();
+
+const isMenuPdf = computed(() => commonStore?.dai5?.menu_type === 'file')
+
+const menuUrl = computed(() => commonStore.dai5.menu_url)
+
+const onMenuClick = () => {
+    if (isMenuPdf.value) {
+        window.open(menuUrl.value, '_blank');
+    }
+}
+</script>
 
 <style scoped lang="scss">
 .ui-icon {

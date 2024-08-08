@@ -263,15 +263,15 @@ onBeforeUpdate(() => {
 }
 
 .code-input > input {
-  padding: 12px 15px;
+  padding-bottom: 2px;
 
-  @include text_normal;
+  font-size: 14px;
   font-weight: 500;
   color: var(--blackText2);
 
   background: var(--grayBg2);
   border: 0;
-  border-radius: 14px;
+  border-radius: 8px;
   text-align: center;
   font-feature-settings: 'pnum' on, 'lnum' on;
 }
@@ -283,7 +283,7 @@ onBeforeUpdate(() => {
 
 .code-input > input:focus {
   outline: none;
-  border: 2px solid var(--yellow);
+  border: 2px solid var(--purple2);
   // caret-color: #006fff;
 }
 

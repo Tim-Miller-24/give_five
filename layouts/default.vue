@@ -16,8 +16,13 @@ const route = useRoute();
 const headerExtraClass = computed(() => route.name === 'index' ? 'index' : '')
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .layout-default {
     padding-top: 110px;
+
+    max-width: 768px;
+    width: 100%;
+
+    margin: auto;
 }
 </style>

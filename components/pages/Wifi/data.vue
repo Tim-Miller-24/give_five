@@ -6,7 +6,7 @@
                 <p>Название</p>
             </div>
             <div class="data__right">
-                <p>Our_Wi-Fi</p>
+                <p>{{ wifiLogin }}</p>
                 <UIIcon name="copy" />
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <p>Пароль</p>
             </div>
             <div class="data__right">
-                <p>12345</p>
+                <p>{{ wifiPassword }}</p>
                 <UIIcon name="copy" />
             </div>
         </div>
@@ -26,7 +26,13 @@
     </div>
 </template>
 
-<script></script>
+<script lang="ts" setup>
+const commonStore = useCommonStore();
+
+const wifiLogin = computed(() => commonStore.dai5.wifi_login);
+
+const wifiPassword = computed(() => commonStore.dai5.wifi_password);
+</script>
 
 <style lang="scss" scoped>
 :deep(.ui-icon) svg path {

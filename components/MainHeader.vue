@@ -3,7 +3,7 @@
         <div class="header__bar">
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
                 <div class="header__bar-buttons_block">
-                    <UIIcon @click="navigateTo('/lk')" name="icon-user" class="icon-user"></UIIcon>
+                    <UIIcon @click="userStore.isAuth ? navigateTo('/lk') : navigateTo('/login')" name="icon-user" class="icon-user"></UIIcon>
                     <UIIcon name="icon-chat"></UIIcon>
                 </div>
 
@@ -14,7 +14,7 @@
                         <UIIcon name="icon-notification"></UIIcon>
                     </NuxtLink>
 
-                    <div class="coins" @click="navigateTo('/bonuses')">
+                    <div class="coins" @click="navigateTo('/lk/bonuses')">
                         <span> 250 </span>
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>
                     </div>
@@ -39,6 +39,8 @@
 
 <script setup>
 import mainBg from '@/assets/images/header-banner-bg.png';
+
+const userStore = useUserStore()
 
 const props = defineProps({
     extraClass: {
@@ -94,7 +96,10 @@ onBeforeMount(() => {
 }
 
 .header {
+    max-width: 768px;
     width: 100%;
+
+    margin: auto;
     color: var(--white);
 
     &__title {
@@ -202,7 +207,7 @@ onBeforeMount(() => {
         min-height: 100vh;
         width: 100vw;
 
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 8;
