@@ -20,16 +20,16 @@
             <p class="navigation__name">Промокоды и акции</p>
         </NuxtLink>
 
+        <NuxtLink class="navigation__block">
+            <UIIcon class="ui-icon" color="white" name="buy-crypto" to="/lk/bonuses" />
+
+            <p class="navigation__name">Бонусы</p>
+        </NuxtLink>
+
         <NuxtLink class="navigation__block" to="/lk/PaymentsHistory">
             <UIIcon class="ui-icon" color="white" name="receipt-item" />
 
             <p class="navigation__name">История оплаты</p>
-        </NuxtLink>
-
-        <NuxtLink class="navigation__block">
-            <UIIcon class="ui-icon" color="white" name="like-tag" />
-
-            <p class="navigation__name">Промокоды и акции</p>
         </NuxtLink>
     </div>
 </template>

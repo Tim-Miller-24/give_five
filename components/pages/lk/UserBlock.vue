@@ -5,9 +5,9 @@
         </div>
 
         <div class="user__text">
-            <h3 class="user__name">Иванов Виктор</h3>
+            <h3 class="user__name"> {{ userStore.user.display_name }} </h3>
 
-            <p class="user__phone">+7 999 649 53 25</p>
+            <p class="user__phone">+ {{ userStore.user.phone }}</p>
         </div>
 
 
