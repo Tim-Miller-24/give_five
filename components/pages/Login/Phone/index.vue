@@ -267,7 +267,8 @@ const onSubmit = () => {
     }
 
     .vti__dropdown-list {
-        width: 368px;
+        width: calc(100vw - 32px);
+
         max-height: 270px;
 
         padding: 20px;

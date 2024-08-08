@@ -29,7 +29,7 @@
         </div>
 
         <div class="header__image-box">
-            <!-- <img :data-src="mainBg" v-lazy-load alt=""> -->
+            <img :data-src="mainBg" v-lazy-load alt="">
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
@@ -199,19 +199,26 @@ onBeforeMount(() => {
     }
 
     &__image-box {
-        background: url('@/assets/images/header-banner-bg.png');
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
+        // background: url('@/assets/images/header-banner-bg.png');
+
+        // background-size: cover;
+        // background-position: center center;
 
         min-height: 100vh;
         width: 100vw;
 
+        
         position: fixed;
         top: 0;
         left: 0;
         z-index: 8;
-
+        
+        & > img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+        }
 
         &>.gray-frame {
             position: fixed;
