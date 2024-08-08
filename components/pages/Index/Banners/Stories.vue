@@ -142,7 +142,7 @@ onMounted(() => {
                     const storyItem = {
                         id: itemStoryId,
                         type: item.image ? 'photo' : 'video',
-                        length: (+item.screen_time / 1000) || 3,
+                        length: (+item.screen_time / 1000) || 300,
                         src: item.image ? item.image : item.stories_video.url,
                         preview: item.preview || item.image,
                         link: checkLink(item), // Добавляем ссылку
@@ -174,6 +174,7 @@ onMounted(() => {
         if (process.client) {
             for (let elem of storyElements) {
                 elem.addEventListener('click', (() => {
+                    console.log('clicked');
                     window?.scrollTo({ top: 0, behavior: 'smooth' })
                     isStoryOpen.value = true;
                 }))
@@ -227,6 +228,10 @@ const closeStory = () => {
 }
 
 #zuck-modal {
+    z-index: 1000;
+}
+
+#zuck-modal-content {
     z-index: 1000;
 }
 
@@ -294,7 +299,7 @@ const closeStory = () => {
 
 .stories {
     position: relative;
-    z-index: 50;
+    z-index: 50 !important;
 
     // margin-bottom: -20px !important;
 
