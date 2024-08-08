@@ -20,8 +20,8 @@
             <p class="navigation__name">Промокоды и акции</p>
         </NuxtLink>
 
-        <NuxtLink class="navigation__block">
-            <UIIcon class="ui-icon" color="white" name="buy-crypto" to="/lk/bonuses" />
+        <NuxtLink class="navigation__block" to="/lk/bonuses">
+            <UIIcon class="ui-icon" color="white" name="buy-crypto" />
 
             <p class="navigation__name">Бонусы</p>
         </NuxtLink>
