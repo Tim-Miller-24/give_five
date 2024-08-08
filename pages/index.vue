@@ -1,5 +1,5 @@
 <template>
-    <main style="min-height: 100vh; margin-top: 150%;" class="main">
+    <main style="min-height: 100vh; margin-top: 130%;" class="main">
         <PagesIndexBannersStories />
 
         <PagesIndexBlock />

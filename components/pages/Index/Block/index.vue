@@ -182,7 +182,6 @@ const onMenuClick = () => {
 
     &__box {
         background: #EBEBEB33;
-        border: 1px solid #FFFFFF0D;
 
        &:first-child {
         margin-left: -10px;

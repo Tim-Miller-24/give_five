@@ -29,16 +29,17 @@
         </div>
 
         <div class="header__image-box">
-            <img :data-src="mainBg" v-lazy-load alt="">
+            <img :data-src="mainBg" v-lazy-load alt="" :key="'main-bg'">
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
-        <img src="@/assets/images/header-text.png" v-if="props.extraClass === 'index'" class="header__text" alt="">
+        <img :data-src="bgText" v-lazy-load :key="'bg-text'" v-if="props.extraClass === 'index'" class="header__text" alt="">
     </div>
 </template>
 
 <script setup>
 import mainBg from '@/assets/images/header-banner-bg.png';
+import bgText from '@/assets/images/header-text.png';
 
 const userStore = useUserStore()
 

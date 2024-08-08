@@ -315,16 +315,14 @@ const closeStory = () => {
     ::v-deep(.story) {
         opacity: 1 !important;
         max-height: none !important;
-        max-width: 90px !important;
+        width: 90px !important;
         height: 100px !important;
-        width: 100% !important;
         border-radius: 20px !important;
 
         &>a {
             max-height: none !important;
-            max-width: 90px !important;
+            width: 90px !important;
             height: 100px !important;
-            width: 100% !important;
         }
     }
 
