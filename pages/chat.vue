@@ -1,28 +1,27 @@
 <template>
-    <div class="lk">
-        <div class="lk__title">
+    <div class="chat">
+        <div class="chat__title">
             <NuxtLink to="/">
                 <UIIcon class="ui-icon" name="arrow-left" />
             </NuxtLink>
-            <h3>ПРОФИЛЬ</h3>
+            <h3>чат с компанией</h3>
         </div>
 
-        <PagesLkUserBlock />
+        <div class="chat__box">
 
-        <PagesLkNavigation />
-
-        <CommonAboutLinks />
+        </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+
 </script>
 
 <style lang="scss" scoped>
-.lk {
-    padding-bottom: 40px;
-
+.chat {
     position: relative;
+
+    padding-bottom: 40px;
 
     &__title {
         display: flex;
@@ -37,11 +36,22 @@
 
             position: absolute;
 
+            text-transform: uppercase;
+
+            text-wrap: nowrap;
+
             top: 2px;
             left: 50%;
 
             transform: translateX(-50%);
         }
+    }
+
+    &__box {
+        margin-top: 16px;
+        background: #EBEBEB33;
+        padding: 16px;
+        border-radius: 12px;
     }
 }
 

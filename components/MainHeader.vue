@@ -4,7 +4,7 @@
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
                 <div class="header__bar-buttons_block">
                     <UIIcon @click="userStore.isAuth ? navigateTo('/lk') : navigateTo('/login')" name="icon-user" class="icon-user"></UIIcon>
-                    <UIIcon name="icon-chat"></UIIcon>
+                    <UIIcon name="icon-chat" @click="navigateTo('/chat')"></UIIcon>
                 </div>
 
                 <h1 class="header__title" @click="navigateTo('/')">ДАЙ 5</h1>

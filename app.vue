@@ -26,6 +26,7 @@ catalogStore.getCatalog();
 commonStore.getPickups();
 commonStore.getDelivery();
 commonStore.getDeliveryTimes();
+commonStore.getMenu();
 
 commonStore.getContacts();
 
