@@ -1,7 +1,7 @@
 <template>
     <div class="notifications">
         <div class="notifications__title">
-            <NuxtLink to="/lk">
+            <NuxtLink to="/">
                 <UIIcon class="ui-icon" name="arrow-left" />
             </NuxtLink>
             <h3>уведомления</h3>

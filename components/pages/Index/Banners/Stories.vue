@@ -2,7 +2,7 @@
     <div>
         <div id="stories" class="stories"></div>
 
-        <UIIcon class="ui-icon" v-if="isStoryOpen" @click="closeStory" id="custom-close-story" name="arrow-left" />
+        
     </div>
 </template>
 
@@ -156,31 +156,6 @@ onMounted(() => {
                 }
             }
         }
-
-        const observer = new MutationObserver(() => {
-            const zuckModal = document.getElementById('zuck-modal-slider-stories');
-            if (zuckModal) {
-                isStoryOpen.value = true;
-            } else {
-                isStoryOpen.value = false;
-            }
-        });
-
-        observer.observe(document.body, { childList: true, subtree: true });
-
-        const storyElements = document.querySelectorAll('.story');
-
-
-        if (process.client) {
-            for (let elem of storyElements) {
-                elem.addEventListener('click', (() => {
-                    console.log('clicked');
-                    window?.scrollTo({ top: 0, behavior: 'smooth' })
-                    isStoryOpen.value = true;
-                }))
-            }
-        }
-
     });
 });
 
@@ -207,33 +182,22 @@ const checkLink = (item) => {
     }
 }
 
-const closeStory = () => {
-    nextTick(() => {
-        const zuckModal = document.getElementById('zuck-modal');
-        if (zuckModal) {
-            // Вызовите метод закрытия Zuck.js
-            isStoryOpen.value = false;
-            zuckModal.querySelector('.story-viewer .close').click();
-        }
-    })
-};
 </script>
 
 <style lang="scss">
-#custom-close-story {
-    z-index: 6000;
-    position: fixed;
-    top: 145px;
-    left: 16px;
-}
 
 #zuck-modal {
     z-index: 1000;
 }
 
-
 #zuck-modal-content .story-viewer .head .right .time {
     display: none;
+}
+
+#zuck-modal-content .story-viewer .slides-pointers {
+    position: absolute;
+    bottom: 5px !important;
+    top: auto;
 }
 
 #zuck-modal-content .story-viewer .tip {

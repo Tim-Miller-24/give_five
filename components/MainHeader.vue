@@ -19,6 +19,8 @@
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>
                     </div>
                 </div>
+
+                <UIIcon class="ui-icon" v-if="isStoryOpened" @click="closeStory" id="custom-close-story" name="arrow-left" />
             </div>
 
             <div class="header__bar-address">
@@ -43,6 +45,8 @@ import bgText from '@/assets/images/header-text.png';
 
 const userStore = useUserStore()
 
+const isStoryOpened = ref(false);
+
 const props = defineProps({
     extraClass: {
         type: String,
@@ -62,13 +66,60 @@ const userScroll = () => {
 
 onMounted(() => {
     window.addEventListener("scroll", userScroll);
+
+    nextTick(() => {
+        const observer = new MutationObserver(() => {
+            const zuckModal = document.getElementById('zuck-modal-slider-stories');
+            if (zuckModal) {
+                isStoryOpened.value = true;
+            } else {
+                isStoryOpened.value = false;
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        const storyElements = document.querySelectorAll('.story');
+
+        if (process.client) {
+            for (let elem of storyElements) {
+                elem.addEventListener('click', (() => {
+                    isStoryOpened.value = true;
+                    window?.scrollTo({ top: 0, behavior: 'smooth' })
+                }))
+            }
+        }
+    })
 })
 onBeforeMount(() => {
     window.removeEventListener("scroll", userScroll);
 })
+
+const closeStory = () => {
+    nextTick(() => {
+        const zuckModal = document.getElementById('zuck-modal');
+        if (zuckModal) {
+            // Вызовите метод закрытия Zuck.js
+            isStoryOpened.value = false;
+            zuckModal.querySelector('.story-viewer .close').click();
+        }
+    })
+};
 </script>
 
 <style lang="scss" scoped>
+#custom-close-story {
+    z-index: 6000;
+    position: fixed;
+    top: 145px;
+    left: 16px;
+    background: #FFFFFF4D;
+    border: 1px solid #FFFFFF4D;
+    min-width: 35px;
+    min-height: 35px;
+
+    border-radius: 50%;
+}
 .ui-icon {
     :deep svg path {
         fill: var(--white);
