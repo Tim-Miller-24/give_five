@@ -7,63 +7,92 @@
             <h3>уведомления</h3>
         </div>
 
-        <div class="notifications__content">
+        <div class="notifications__content" v-if="!isLoading">
             <div class="notifications__buttons">
-                <UIButton color="gray" @click="selectedButton = 'all'"
-                    :class="{ 'active': selectedButton === 'all' }">
+                <UIButton color="gray" @click="selectedButton = 'all'" :class="[{ 'active': selectedButton === 'all' }, {'alone': !isShowOrderFilter && !isShowPromoFilter && !isShowImportantFilter}]">
                     Все
                 </UIButton>
 
-                <UIButton color="gray" @click="selectedButton = 'order'"
+                <UIButton v-if="isShowOrderFilter" color="gray" @click="selectedButton = 'order'"
                     :class="{ 'active': selectedButton === 'order' }">
                     Заказы
                 </UIButton>
-                <UIButton color="gray" @click="selectedButton = 'promotion'"
-                    :class="{ 'active': selectedButton === 'promotion' }">
+                <UIButton v-if="isShowPromoFilter" color="gray" @click="selectedButton = 'promo'"
+                    :class="{ 'active': selectedButton === 'promo' }">
                     Акции
                 </UIButton>
-                <UIButton color="gray" @click="selectedButton = 'important'"
+                <UIButton v-if="isShowImportantFilter" color="gray" @click="selectedButton = 'important'"
                     :class="{ 'active': selectedButton === 'important' }">
                     Важное
                 </UIButton>
             </div>
 
             <div class="notifications__box">
-                <div class="notifications__day-block">
-                    <h4 class="notifications__day-title">Сегодня, 4 июня 2024</h4>
-                    <PagesLkNotificationsCard :item="temp" />
-                </div>
-                <div class="notifications__day-block">
-                    <h4 class="notifications__day-title">Вчера, 3 июня 2024</h4>
-                    <PagesLkNotificationsCard :item="temp3" />
-                    <PagesLkNotificationsCard :item="temp2" />
-                </div>
-                <div class="notifications__day-block">
-                    <h4 class="notifications__day-title">1 июня 2024</h4>
-                    <PagesLkNotificationsCard :item="temp" />
-                    <PagesLkNotificationsCard :item="temp3" />
+                <div class="notifications__day-block" v-for="(group, index) in groupedHistory"
+                :key="index">
+                    <h4 class="notifications__day-title" v-if="filterGroupByType(group, selectedButton)?.length > 0">{{ formatDate(group[0].date_added) }}</h4>
+                    
+                    <PagesLkNotificationsCard v-for="(card, index) in filterGroupByType(group, selectedButton)" :key="index"
+                    :item="card" />
                 </div>
             </div>
         </div>
+
+        <UILoader class="notifications__loader" v-else is-big />
 
     </div>
 </template>
 
 <script setup lang="ts">
-const temp = {
-    type: 'order'
-}
-const temp2 = {
-    type: 'important'
-}
-const temp3 = {
-    type: 'promotion'
-}
+
+const userStore = useUserStore()
+const config = useRuntimeConfig();
+
+const groupedHistory = ref([]);
+
+const isLoading = ref(false)
 
 const selectedButton = ref('all');
 
-watch(() => selectedButton.value, () => {
+const isShowOrderFilter = computed(() => groupedHistory.value.some(day => day.some(group => group.type === 'promo')))
 
+const isShowPromoFilter = computed(() => groupedHistory.value.some(day => day.some(group => group.type === 'promo')))
+
+const isShowImportantFilter = computed(() => groupedHistory.value.some(day => day.some(group => group.type === 'important')))
+
+const filterGroupByType = (group: object, selectedType: string) => {
+    if (selectedType === 'all') {
+        return group;
+    }
+    return group.filter(item => item.type === selectedType);
+}
+
+async function getHistory() {
+    isLoading.value = true;
+
+    let history = await userStore.getHistory(userStore.token, config);
+
+    if (history) {
+        //@ts-ignore
+        const groupedData = history.value.reduce((acc, obj) => {
+            const key = obj.date_added.split(' ')[0];
+            if (!acc[key]) {
+                acc[key] = [];
+            }
+            acc[key].push(obj);
+            return acc;
+        }, {});
+
+        isLoading.value = false;
+
+        groupedHistory.value = Object.values(groupedData) || [];
+
+        console.log(groupedHistory.value);
+    }
+}
+
+watchEffect(() => {
+    getHistory();
 })
 </script>
 
@@ -112,6 +141,10 @@ watch(() => selectedButton.value, () => {
                 color: var(--black);
                 background: #FFFFFFCC;
             }
+
+            &.alone {
+                max-width: 80px;
+            }
         }
     }
 
@@ -147,6 +180,12 @@ watch(() => selectedButton.value, () => {
         text-align: center;
         color: var(--grayText);
         margin-bottom: 8px;
+    }
+
+    &__loader {
+        width: 100%;
+        margin: auto;
+        margin-top: 40px;
     }
 }
 

@@ -1,12 +1,12 @@
 <template>
     <div class="card">
         <div class="card__header">
-            <h3 class="card__title">Сегодня, 4 июня 2024</h3>
+            <h3 class="card__title"> {{ formatDate(props.item.date_added) }} </h3>
             <span class="card__label" :class="props.item.type"> {{ label }} </span>
         </div>
         <div class="card__info">
-            <h4>Внимание!</h4>
-            <p>Завтра у вас закончится срок действия промокода “Скидка 10% на доставку”</p>
+            <h4> {{ props.item.title }} </h4>
+            <p> {{ props.item.text }} </p>
         </div>
     </div>
 </template>
@@ -21,12 +21,14 @@ const props = defineProps({
 
 const label = computed(() => {
     switch (props.item.type) {
-        case 'order':
+        case 'c':
             return 'Заказ';
         case 'important':
             return 'Важное';
-        case 'promotion':
+        case 'promo':
             return 'Акции';
+        default:
+            return 'Уведомление'
     }
 })
 </script>
@@ -78,7 +80,7 @@ const label = computed(() => {
             background: var(--purple4);
         }
 
-        &.promotion {
+        &.promo {
             background: var(--orange);
         }
     }
