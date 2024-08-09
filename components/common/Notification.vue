@@ -73,7 +73,7 @@ watch(() => props.modelValue, (newVal) => {
         padding: 25px 40px;
     }
 
-    &::v-deep span svg path {
+    &:deep span svg path {
         fill: var(--red);
     }
 }

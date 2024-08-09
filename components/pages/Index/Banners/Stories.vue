@@ -272,7 +272,7 @@ const closeStory = () => {
 </style>
 
 <style lang="scss" scoped>
-::v-deep(.with-effects) {
+:deep(.with-effects) {
     display: flex !important;
 }
 
@@ -309,7 +309,7 @@ const closeStory = () => {
         padding-left: 6px;
     }
 
-    ::v-deep(.story) {
+    :deep(.story) {
         opacity: 1 !important;
         max-height: none !important;
         width: 90px !important;
@@ -323,7 +323,7 @@ const closeStory = () => {
         }
     }
 
-    ::v-deep(.item-preview) {
+    :deep(.item-preview) {
         max-height: none !important;
         border-radius: 20px !important;
         height: 100px !important;

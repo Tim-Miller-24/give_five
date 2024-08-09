@@ -15,7 +15,7 @@
                     </NuxtLink>
 
                     <div class="coins" @click="navigateTo('/lk/bonuses')">
-                        <span> 250 </span>
+                        <span> <LayoutHeaderBonuses /> </span>
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>
                     </div>
                 </div>

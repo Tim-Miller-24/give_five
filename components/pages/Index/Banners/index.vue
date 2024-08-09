@@ -71,7 +71,7 @@ const banners = reactive([
 .index-menu__slider--new {
     z-index: 1000;
 
-    &::v-deep(.swiper-wrapper) {
+    &:deep(.swiper-wrapper) {
         display: flex;
 
         &:first-child {

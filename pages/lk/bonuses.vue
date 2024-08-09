@@ -32,7 +32,6 @@
 
         margin-top: 16px;
         
-        border: 1px solid #FFFFFF0D;
         border-radius: 16px;
 
         padding: 16px;
