@@ -229,6 +229,8 @@ const isSharingModalOpened = ref(false);
 
         position: relative;
 
+        text-transform: uppercase;
+
         &>h3 {
             font-size: 20px;
             color: var(--white);

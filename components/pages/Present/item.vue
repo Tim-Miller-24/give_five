@@ -91,6 +91,8 @@ const emits = defineEmits(['share'])
         padding: 9px;
         border-radius: 8px;
 
+        margin-top: 5px;
+
         font-size: 14px;
 
         width: max-content;

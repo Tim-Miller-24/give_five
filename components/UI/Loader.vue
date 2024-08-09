@@ -52,7 +52,7 @@ defineProps({
 }
 
 .loader-path {
-  stroke: var(--black);
+  stroke: var(--white);
   stroke-dasharray: 150, 200;
   stroke-dashoffset: -10;
   stroke-linecap: round;
@@ -82,17 +82,17 @@ defineProps({
 
 @keyframes color {
   0% {
-    stroke: var(--black);
+    stroke: var(--white);
   }
   40% {
-    stroke: var(--black);
+    stroke: var(--white);
   }
   66% {
-    stroke: var(--black);
+    stroke: var(--white);
   }
   80%,
   90% {
-    stroke: var(--black);
+    stroke: var(--white);
   }
 }
 </style>
