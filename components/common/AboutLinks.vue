@@ -13,8 +13,6 @@ const about = ref([])
 
 const menu = computed(() => commonStore.menu?.user_cab);
 
-console.log(menu.value);
-
 if (menu.value) {
     menu.value.forEach((item: object, i: number) => {
         let link: string = '/information';
@@ -29,7 +27,6 @@ if (menu.value) {
     });
 }
 
-console.log(about.value);
 
 // const about = ref([]);
 // const Menu = computed(() => commonStore.menu)

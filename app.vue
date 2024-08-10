@@ -28,6 +28,8 @@ commonStore.getDelivery();
 commonStore.getDeliveryTimes();
 commonStore.getMenu();
 
+commonStore.getBanners();
+
 commonStore.getContacts();
 
 </script>

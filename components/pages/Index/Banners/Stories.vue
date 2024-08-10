@@ -1,101 +1,14 @@
 <template>
     <div>
         <div id="stories" class="stories"></div>
-
-        
     </div>
 </template>
 
 <script setup>
+const commonStore = useCommonStore();
+const catalogStore = useCartStore();
 
-import carousel_0 from '@/assets/images/carousel-0.png';
-import carousel_1 from '@/assets/images/carousel-1.png';
-import carousel_2 from '@/assets/images/carousel-2.png';
-import carousel_3 from '@/assets/images/carousel-3.png';
-
-const banners = reactive([
-    {
-        id: 0,
-        image: carousel_0,
-        inner_banners: [
-            {
-                id: 0,
-                image: carousel_0
-            }
-        ]
-    },
-    {
-        id: 1,
-        image: carousel_1,
-        inner_banners: [
-            {
-                id: 1,
-                image: carousel_1
-            }
-        ]
-
-    },
-    {
-        id: 2,
-        image: carousel_2,
-        inner_banners: [
-            {
-                id: 2,
-                image: carousel_2
-            }
-        ]
-    },
-    {
-        id: 3,
-        image: carousel_3,
-        inner_banners: [
-            {
-                id: 3,
-                image: carousel_3
-            }
-        ]
-    },
-    {
-        id: 4,
-        image: carousel_0,
-        inner_banners: [
-            {
-                id: 0,
-                image: carousel_0
-            }
-        ]
-    },
-    {
-        id: 5,
-        image: carousel_1,
-        inner_banners: [
-            {
-                id: 1,
-                image: carousel_1
-            }
-        ]
-    },
-    {
-        id: 6,
-        image: carousel_2,
-        inner_banners: [
-            {
-                id: 2,
-                image: carousel_2
-            }
-        ]
-    },
-    {
-        id: 7,
-        image: carousel_3,
-        inner_banners: [
-            {
-                id: 3,
-                image: carousel_3
-            }
-        ]
-    },
-])
+const banners = computed(() => commonStore.slidesGallery);
 
 const isStoryOpen = ref(false);
 
@@ -117,7 +30,7 @@ onMounted(() => {
         const createdIds = new Set();
 
         // Добавляем основные истории
-        for (let slide of banners) {
+        for (let slide of banners.value) {
             // Проверяем условие перед добавлением
             const storyId = generateUniqueId(); // Генерируем уникальный id для каждой истории
 
@@ -142,12 +55,13 @@ onMounted(() => {
                     const storyItem = {
                         id: itemStoryId,
                         type: item.image ? 'photo' : 'video',
-                        length: (+item.screen_time / 1000) || 3,
+                        length: 300,
+                        // length: (+item.screen_time / 1000) || 3,
                         src: item.image ? item.image : item.stories_video.url,
                         preview: item.preview || item.image,
-                        link: checkLink(item), // Добавляем ссылку
-                        linkText: item.text_button || 'Подробнее', // Текст кнопки
-                        time: item.time || 0,
+                        // link: checkLink(item), // Добавляем ссылку
+                        // linkText: item.text_button || 'Подробнее', // Текст кнопки
+                        time: item?.time || 0,
                         seen: false,
                     };
 
@@ -159,28 +73,28 @@ onMounted(() => {
     });
 });
 
-const checkLink = (item) => {
-    if (item) {
-        if (item.type === 'product') {
-            // catalogStore.setProduct(item.product);
+// const checkLink = (item) => {
+//     if (item) {
+//         if (item.type === 'product') {
+//             // catalogStore.setProduct(item.product);
 
-            // let temp = catalogStore.getProductById(item.product);
+//             // let temp = catalogStore.getProductById(item.product);
 
-            // router.push(`${temp.slug}`);
-            return '/?product_id=' + item.product;
-        }
+//             // router.push(`${temp.slug}`);
+//             return '/?product_id=' + item.product;
+//         }
 
-        if (item.type === 'category') {
-            let temp = catalogStore.categories?.find(cat => +cat.id === +item.category);
+//         if (item.type === 'category') {
+//             let temp = catalogStore.categories?.find(cat => +cat.id === +item.category);
 
-            // router.push(`/menu/${temp.slug}`);
-            return '/' + item.category;
-        }
+//             // router.push(`/menu/${temp.slug}`);
+//             return '/' + item.category;
+//         }
 
-        // router.push(`${item.link}`);
-        return item.url;
-    }
-}
+//         // router.push(`${item.link}`);
+//         return item.url;
+//     }
+// }
 
 </script>
 
@@ -217,8 +131,9 @@ const checkLink = (item) => {
         top: 0 !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
+        object-fit: cover !important;
         width: 100% !important;
-        height: auto !important;
+        height: 100% !important;
     }
 }
 
