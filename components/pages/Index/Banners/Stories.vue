@@ -55,8 +55,8 @@ onMounted(() => {
                     const storyItem = {
                         id: itemStoryId,
                         type: item.image ? 'photo' : 'video',
-                        length: 300,
-                        // length: (+item.screen_time / 1000) || 3,
+                        // length: 300,
+                        length: (+item.screen_time / 1000) || 3,
                         src: item.image ? item.image : item.stories_video.url,
                         preview: item.preview || item.image,
                         // link: checkLink(item), // Добавляем ссылку
