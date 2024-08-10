@@ -20,7 +20,6 @@ if (menu.value) {
         let url = new URL(item.url);
         link += url.pathname
 
-        console.log(link);
         about.value?.push({
             link: link, name: item.title
         })

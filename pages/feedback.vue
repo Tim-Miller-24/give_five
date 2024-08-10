@@ -5,9 +5,11 @@
             <h3>ОТЗЫВЫ</h3>
         </div>
 
-        <PagesFeedBackRating />
-
-        <PagesFeedBackBlock />
+        <div class="feedback__content">
+            <PagesFeedBackRating />
+    
+            <PagesFeedBackBlock />
+        </div>
     </div>
 </template>
 
@@ -36,6 +38,15 @@
 
             transform: translateX(-50%);
         }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+
+        gap: 16px;
+
+        margin-top: 16px;
     }
 }
 

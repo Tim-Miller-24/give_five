@@ -115,7 +115,7 @@ const isDisabled = computed(() => {
     border: 1px solid #FFFFFF0D;
 
     &:hover:enabled {
-      background: var(--grayBg2);
+      background: #ffffff58;
     }
   }
   &--gray2 {
@@ -123,7 +123,7 @@ const isDisabled = computed(() => {
     background: #FFFFFF4D;
     
     &:hover:enabled {
-      background: var(--grayBg2);
+      background: #ffffff62;
     }
   }
 

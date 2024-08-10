@@ -13,9 +13,6 @@
 
 <style lang="scss" scoped>
 .rating {
-    margin-top: 16px;
-    margin-bottom: 16px;
-
     position: relative;
     display: flex;
     flex-direction: column;

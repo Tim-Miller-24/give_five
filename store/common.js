@@ -60,6 +60,8 @@ export const useCommonStore = defineStore('commonStore', {
 
     dai5: null,
 
+    routerHistory: null,
+
     notifications: [],
     popups: [], // попапы
     oneTimePopups: null,
@@ -689,6 +691,6 @@ export const useCommonStore = defineStore('commonStore', {
 
   persist: {
     storage: persistedState.localStorage,
-    paths: ['deliveryType', 'selectedLocation', 'promoSettings', 'oneTimePopups', 'fragmentedCatalog']
+    paths: ['deliveryType', 'selectedLocation', 'promoSettings', 'oneTimePopups', 'fragmentedCatalog', 'routerHistory']
   },
 })
