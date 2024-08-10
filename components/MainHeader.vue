@@ -1,15 +1,15 @@
 <template>
     <div class="header" :class="props.extraClass">
         <div class="header__bar">
-            <div class="header__bar-buttons" :class="{ 'blur': isScrolled }">
-                <div class="header__bar-buttons_block" v-if="!isStoryOpened">
+            <div class="header__bar-buttons" :class="{ 'blur': isScrolled && !isStoryOpened }">
+                <div class="header__bar-buttons_block" :class="{'d-none': isStoryOpened}">
                     <UIIcon @click="userStore.isAuth ? navigateTo('/lk') : navigateTo('/login')" name="icon-user" class="icon-user"></UIIcon>
                     <UIIcon name="icon-chat" @click="navigateTo('/chat')"></UIIcon>
                 </div>
 
-                <h1 class="header__title" @click="navigateTo('/')" v-if="!isStoryOpened">ДАЙ 5</h1>
+                <h1 class="header__title" @click="navigateTo('/')" :class="{'d-none': isStoryOpened}">ДАЙ 5</h1>
 
-                <div class="header__bar-buttons_block" v-if="!isStoryOpened">
+                <div class="header__bar-buttons_block" :class="{'d-none': isStoryOpened}">
                     <NuxtLink to="/lk/Notifications">
                         <UIIcon name="icon-notification"></UIIcon>
                     </NuxtLink>
@@ -23,7 +23,7 @@
                 <UIIcon class="ui-icon" v-if="isStoryOpened" @click="closeStory" id="custom-close-story" name="close" />
             </div>
 
-            <div class="header__bar-address" v-if="!isStoryOpened">
+            <div class="header__bar-address" :class="{'d-none': isStoryOpened}">
                 <p>Urban Oasis Grill</p>
                 <span class="dot"></span>
                 <p>Москва, проспект Победы 35</p>
@@ -108,6 +108,9 @@ const closeStory = () => {
 </script>
 
 <style lang="scss" scoped>
+.d-none {
+    display: none !important;
+}
 #custom-close-story {
     z-index: 6000;
     position: fixed;

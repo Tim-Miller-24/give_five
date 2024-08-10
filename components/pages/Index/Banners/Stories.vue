@@ -10,7 +10,6 @@ const catalogStore = useCartStore();
 
 const banners = computed(() => commonStore.slidesGallery);
 
-const isStoryOpen = ref(false);
 
 onMounted(() => {
     nextTick(() => {
