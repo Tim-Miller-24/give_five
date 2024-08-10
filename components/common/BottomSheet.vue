@@ -91,7 +91,7 @@ const onDragEnd = () => {
   dragPosition.value = null
   isDraggable.value = false
 
-  if (isFullscreen.value && sheetHeight.value < 90) {
+  if (isFullscreen.value && sheetHeight.value < 80) {
     isFullscreen.value = false
     setSheetHeight(START_HEIGHT)
     return
@@ -99,13 +99,13 @@ const onDragEnd = () => {
 
   if (sheetHeight.value > 25) {
     if (props.isModalMap) {
-      setSheetHeight(90);
+      setSheetHeight(80);
     }
     else if (props.isQr) {
       setSheetHeight(70);
     }
     else {
-      setSheetHeight(90)
+      setSheetHeight(80)
     }
     isFullscreen.value = true
   } else {
@@ -116,7 +116,7 @@ const onDragEnd = () => {
 
 onMounted(() => {
   if (props.isOrder) {
-    setSheetHeight(90);
+    setSheetHeight(80);
     isFullscreen.value = true;
   }
   if (props.isQr) {
