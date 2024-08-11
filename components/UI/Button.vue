@@ -74,7 +74,8 @@ const isDisabled = computed(() => {
 
   padding: 12px 15px;
 
-  @include text_normal;
+  font-size: 14px;
+  font-weight: 600;
 
   background: none;
   border: 0;

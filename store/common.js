@@ -62,6 +62,8 @@ export const useCommonStore = defineStore('commonStore', {
 
     routerHistory: null,
 
+    uploadedImages: null,
+
     notifications: [],
     popups: [], // попапы
     oneTimePopups: null,

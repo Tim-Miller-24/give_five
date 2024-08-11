@@ -41,8 +41,11 @@ const props = defineProps({
     }
   }
 
-  @include text_normal;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 12px;
+
+  font-family: 'Overpass';
+  
   color: var(--white);
 
   cursor: pointer;
