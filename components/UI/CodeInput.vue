@@ -253,6 +253,7 @@ onBeforeUpdate(() => {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 10px;
 
   &.error {
@@ -265,9 +266,12 @@ onBeforeUpdate(() => {
 .code-input > input {
   padding-bottom: 2px;
 
+  font-family: 'Overpass';
   font-size: 14px;
   font-weight: 500;
-  color: var(--blackText2);
+  line-height: 1;
+
+  color: #00000066;
 
   background: var(--grayBg2);
   border: 0;
@@ -282,6 +286,8 @@ onBeforeUpdate(() => {
 }
 
 .code-input > input:focus {
+  width: 37px !important;
+  height: 44px !important;
   outline: none;
   border: 2px solid var(--purple2);
   // caret-color: #006fff;
