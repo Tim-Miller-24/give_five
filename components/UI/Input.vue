@@ -23,6 +23,7 @@
       @blur="emits('blur')"
       @focus="emits('focus')"
     >
+    <p v-if="isError" class="input__error"> {{ errorText }} </p>
   </div>
 </template>
 
@@ -64,6 +65,14 @@ defineProps({
     type: String,
     default: 'off',
   },
+  isError: {
+    type: Boolean,
+    default: false,
+  },
+  errorText: {
+    type: String,
+    default: ''
+  }
 })
 
 const emits = defineEmits(['update:modelValue', 'blur', 'focus'])
@@ -94,7 +103,7 @@ const emits = defineEmits(['update:modelValue', 'blur', 'focus'])
     color: var(--black);
 
     background: var(--grayBg2);
-    border-radius: 14px;
+    border-radius: 8px;
 
     &--white {
       background: var(--white);
@@ -129,6 +138,13 @@ const emits = defineEmits(['update:modelValue', 'blur', 'focus'])
     &::placeholder {
       color: var(--grayText);
     }
+  }
+
+  &__error {
+    padding-left: 5px;
+    margin-top: 5px;
+    font-size: 13px;
+    color: var(--red);
   }
 }
 </style>

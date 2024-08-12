@@ -119,6 +119,13 @@ const isDisabled = computed(() => {
       background: #ffffff58;
     }
   }
+  &--gray1 {
+    border: 1px solid #FFFFFF4D;
+
+    &:hover:enabled {
+      background: #ffffff58;
+    }
+  }
   &--gray2 {
     border: 1px solid #FFFFFF4D;
     background: #FFFFFF4D;

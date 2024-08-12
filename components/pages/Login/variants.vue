@@ -42,7 +42,7 @@
             <p class="variant__name">Войти по телефону</p>
         </NuxtLink>
 
-        <NuxtLink class="variant__block">
+        <NuxtLink class="variant__block" to="/login/email">
             <UIIcon class="ui-icon" color="white" name="sms" />
 
             <p class="variant__name">Войти по E-mail</p>
