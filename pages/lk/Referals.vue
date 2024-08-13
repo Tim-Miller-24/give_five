@@ -13,7 +13,7 @@
                     <UIIcon name="referals" />
                     <div>
                         <h4 class="referals__card-title">Пригласи друга!</h4>
-                        <h5 class="referals__card-subTitle">Получи 200 руб. за его первый заказ</h5>
+                        <h5 class="referals__card-subTitle">Получи <b>{{ amount }} ₽</b> за его первый заказ</h5>
                     </div>
                 </div>
 
@@ -29,17 +29,16 @@
                 <h4 class="referals__block-title">Твой промокод</h4>
 
                 <div class="referals__block-promo">
-                    <span class="referals__block-promo_value">promo-tim</span>
+                    <span class="referals__block-promo_value"> {{ code }} </span>
 
                     <span class="referals__block-promo_divider"></span>
 
-                    <span class="referals__block-promo_icon" @click="copyCode('promo-tim')">
+                    <span class="referals__block-promo_icon" @click="copyCode(code)">
                         <UIIcon name="copy" />
                     </span>
                 </div>
 
-                <p class="referals__block-desc">Это ваш личный промокод, поделитесь им с друзьями и получите 200 баллов
-                    на ваш счет. </p>
+                <p class="referals__block-desc">{{ text }} </p>
             </div>
 
         </div>
@@ -47,10 +46,20 @@
 </template>
 
 <script setup lang="ts">
+const commonStore = useCommonStore()
+const userStore = useUserStore()
+const config = useRuntimeConfig();
 
-const notificationVisible = ref(false);
+const notificationVisible = ref<boolean>(false);
 
-const textForShare = ref('тестовый текст для кнопки поделиться')
+const isLoading = ref<boolean>(false)
+
+const amount = ref<number>(0)
+
+const code = ref<string>('')
+const text = ref<string>('')
+
+const textForShare = ref<string>('');
 
 const share = async () => {
   if (navigator.share) {
@@ -79,6 +88,25 @@ const copyCode = async (value: string) => {
   }
 }
 
+const getReferals = async () => {
+  isLoading.value = true
+
+  const data = await userStore.getReferals(config)
+
+  isLoading.value = false
+
+  const obj = data?.value || null
+  if (obj) {
+    amount.value = obj.amount
+    code.value = obj.coupon
+    text.value = obj.text
+    textForShare.value = obj.text_for_share.replace(/\r?\n|\r/g, ' ');
+  }
+}
+
+watchEffect(() => {
+    getReferals();
+})
 </script>
 
 <style lang="scss" scoped>
