@@ -57,6 +57,7 @@ const share = async () => {
       // Отправка изображения через Web Share API
       await navigator.share({
         title: 'Персональный промокод',
+        text: props.item.title,
         files: [imageFile],
       });
 

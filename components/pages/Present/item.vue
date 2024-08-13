@@ -3,10 +3,9 @@
         <!-- <img src="@/assets/images/present.png" alt=""> -->
 
         <div class="present__content">
-            <h3 class="present__title">Кофе в подарок <span>Осталось 2</span></h3>
+            <h3 class="present__title">{{ props.item.title }} <span>Осталось 2</span></h3>
 
-            <p class="present__desc">Ароматный и бодрящий напиток станет верным спутником в начале дня и поможет
-                проснуться.</p>
+            <p class="present__desc">{{ props.item.code }}</p>
 
             <div class="present__button" @click="share"><span style="padding-top: 2px;">Отправить другу</span>
                 <UIIcon name="share-2" />
@@ -50,6 +49,7 @@ const share = async () => {
       // Отправка изображения через Web Share API
       await navigator.share({
         title: 'Персональный промокод',
+        text: props.item.title,
         files: [imageFile],
       });
 
