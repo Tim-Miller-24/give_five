@@ -8,7 +8,7 @@
             <p class="present__desc">Ароматный и бодрящий напиток станет верным спутником в начале дня и поможет
                 проснуться.</p>
 
-            <div class="present__button" @click="emits('share')"><span style="padding-top: 2px;">Отправить другу</span>
+            <div class="present__button" @click="share"><span style="padding-top: 2px;">Отправить другу</span>
                 <UIIcon name="share-2" />
             </div>
         </div>
@@ -17,8 +17,24 @@
     </div>
 </template>
 
-<script setup>
-const emits = defineEmits(['share'])
+<script setup lang="ts">
+const textForShare = ref<String>('Подарок!');
+
+const share = async () => {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Персональный промокод',
+        text: textForShare.value.trim(),
+      });
+      console.log('Поделились успешно');
+    } catch (error) {
+      console.error('Ошибка при поделении:', error);
+    }
+  } else {
+    console.warn('Web Share API не поддерживается');
+  }
+};
 </script>
 
 <style lang="scss" scoped>

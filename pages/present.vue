@@ -8,48 +8,17 @@
         </div>
 
         <div class="present__items">
-            <PagesPresentItem @share="isSharingModalOpened = true" />
+            <PagesPresentItem />
 
-            <PagesPresentItem @share="isSharingModalOpened = true" />
+            <PagesPresentItem />
 
-            <PagesPresentItem @share="isSharingModalOpened = true" />
+            <PagesPresentItem />
         </div>
-
-        <CommonBottomSheet v-if="isSharingModalOpened" :isQr="true" @closeModal="isSharingModalOpened = false">
-            <div class="sharing">
-                <div class="sharing__header">
-                    <h3 class="sharing__title">Подарок другу</h3>
-                    <p class="sharing__subTitle">Отправьте ссылку на оплату счета</p>
-                </div>
-
-                <div class="sharing__block">
-                    <div class="sharing__apps">
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/vk.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/ok.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/tg.png" alt="">
-                        </div>
-                        <div class="sharing__image-box">
-                            <img src="@/assets/images/Google.png" alt="">
-                        </div>
-                    </div>
-
-                    <div class="sharing__button button-share">
-                        Скопировать ссылку
-                        <UIIcon name="link" />
-                    </div>
-                </div>
-            </div>
-        </CommonBottomSheet>
     </div>
 </template>
 
 <script setup>
-const isSharingModalOpened = ref(false);
+
 </script>
 
 <style lang="scss" scoped>
