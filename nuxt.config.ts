@@ -115,6 +115,11 @@ export default defineNuxtConfig({
         to: `${process.env.BASE_URL}/wp-json/**`,
       },
     },
+    '/api/wp-content/**': {
+      proxy: {
+        to: `${process.env.BASE_URL}/wp-content/**`,
+      },
+    },
   },
 
   lazyLoad: {

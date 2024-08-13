@@ -1,6 +1,6 @@
 <template>
     <div class="present">
-        <img src="@/assets/images/present.png" alt="">
+        <!-- <img src="@/assets/images/present.png" alt=""> -->
 
         <div class="present__content">
             <h3 class="present__title">Кофе в подарок <span>Осталось 2</span></h3>
@@ -18,15 +18,41 @@
 </template>
 
 <script setup lang="ts">
-const textForShare = ref<String>('Подарок!');
+const config = useRuntimeConfig();
+
+const props = defineProps({
+    item: {
+        type: Object,
+        default: {},
+    }
+})
+
+const qrImage = computed(() => props.item.qrcode);
 
 const share = async () => {
   if (navigator.share) {
     try {
+      // Замена BASE_URL на /api
+      const imageRequest = qrImage.value.replace(`${config.public.BASE_URL}`, '/api');
+      
+      // Использование fetch вместо $fetch
+      const response = await fetch(imageRequest);
+      
+      // Проверка успешности ответа
+      if (!response.ok) {
+        throw new Error('Ошибка загрузки изображения');
+      }
+
+      // Преобразование ответа в Blob
+      const imageBlob = await response.blob();
+      const imageFile = new File([imageBlob], 'qrcode.jpg', { type: imageBlob.type });
+
+      // Отправка изображения через Web Share API
       await navigator.share({
         title: 'Персональный промокод',
-        text: textForShare.value.trim(),
+        files: [imageFile],
       });
+
       console.log('Поделились успешно');
     } catch (error) {
       console.error('Ошибка при поделении:', error);
@@ -67,6 +93,10 @@ const share = async () => {
         border: 1px solid #FFFFFF0D;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
+
+        // temp
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
 
         padding: 16px;
 

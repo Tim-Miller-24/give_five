@@ -7,18 +7,37 @@
             <h3>Подарок другу</h3>
         </div>
 
-        <div class="present__items">
-            <PagesPresentItem />
-
-            <PagesPresentItem />
-
-            <PagesPresentItem />
+        <div class="present__items" v-if="!isLoading">
+            <PagesPresentItem v-for="(promo, index) in promocodes" 
+            :key="index"
+            :item="promo" />
         </div>
+
+        <UILoader class="present__loader" v-else is-big />
     </div>
 </template>
 
 <script setup>
+const userStore = useUserStore()
+const config = useRuntimeConfig();
 
+const isLoading = ref(false)
+const promocodes = ref([])
+
+
+const getPromocodes = async () => {
+  isLoading.value = true
+
+  const data = await userStore.getPromocodes(config);
+
+  isLoading.value = false
+
+  promocodes.value = data?.value.filter(item => item.for_gift) || []
+}
+
+watchEffect(() => {
+    getPromocodes();
+})
 </script>
 
 <style lang="scss" scoped>
@@ -125,6 +144,12 @@
 
             transform: translateX(-50%);
         }
+    }
+
+    &__loader {
+        width: 100%;
+        margin: auto;
+        margin-top: 40px;
     }
 }
 

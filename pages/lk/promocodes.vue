@@ -7,14 +7,14 @@
             <h3>МОИ ПРОМОКОДЫ</h3>
         </div>
 
-        <div class="promocodes__blocks">
-            <PagesPromocodesBlock @qrSelected="isQrOpened=true" />
-
-            <PagesPromocodesBlock @qrSelected="isQrOpened=true" />
-
-            <PagesPromocodesBlock @qrSelected="isQrOpened=true" />
+        <div class="promocodes__blocks" v-if="!isLoading">
+            <PagesPromocodesBlock v-for="(promo, index) in promocodes" 
+            :key="index"
+            :item="promo"
+            @qrSelected="openQr" />
         </div>
 
+        <UILoader class="promocodes__loader" v-else is-big />
 
         <CommonBottomSheet :isModalMap="true" :isQr="true" v-if="isQrOpened" @closeModal="isQrOpened=false">
             <div class="modal">
@@ -24,11 +24,11 @@
                     <p class="modal__subTitle">Чтобы воспользоваться промокодом</p>
                 </div>
 
-                <img src="@/assets/images/promo-qr.png" class="modal__qr-image" alt="">
+                <img :src="qrImg" class="modal__qr-image" alt="">
 
                 <div class="modal__footer">
-                    <h4>10% на доставку</h4>
-                    <p>Скидка 10% на доставку от 3 000 рублей</p>
+                    <h4>{{ modalData.title }}</h4>
+                    <p>{{ modalData.code }}</p>
                 </div>
             </div>
         </CommonBottomSheet>
@@ -37,6 +37,36 @@
 
 <script setup>
 const isQrOpened = ref(false)
+
+const userStore = useUserStore()
+const config = useRuntimeConfig();
+
+const isLoading = ref(false)
+const promocodes = ref([])
+
+const qrImg = ref('');
+
+const modalData = ref();
+
+const openQr = (data) => {
+    modalData.value = data
+    qrImg.value = data.qrcode
+    isQrOpened.value = true;
+}
+
+const getPromocodes = async () => {
+  isLoading.value = true
+
+  const data = await userStore.getPromocodes(config);
+
+  isLoading.value = false
+
+  promocodes.value = data?.value.filter(item => !item.for_gift) || []
+}
+
+watchEffect(() => {
+    getPromocodes();
+})
 </script>
 
 <style lang="scss" scoped>
@@ -68,6 +98,12 @@ const isQrOpened = ref(false)
         display: flex;
         flex-direction: column;
         gap: 16px;
+    }
+
+    &__loader {
+        width: 100%;
+        margin: auto;
+        margin-top: 40px;
     }
 }
 
