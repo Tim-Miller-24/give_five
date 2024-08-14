@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="feedback" v-if="!isRateButtonDisabled && !isShowMapsBlock && !isShowThanksBlock">
+        <div class="feedback" v-if="!isRateButtonDisabled && !isShowMapsBlock && !isShowThanksBlock && +starsRate < 4">
             <form class="feedback__form">
                 <div class="feedback__item">
                     <label for="user-name" class="feedback__label">Имя</label>
@@ -48,10 +48,13 @@
                 <CommonImageUploader />
             </div>
 
-            <UIButton color="purple" :disabled="!checkEmailValidate(userEmail) || !checkName(userName)" @click="submitFeedBack">Далее</UIButton>
+            <UIButton color="purple" :disabled="!checkEmailValidate(userEmail) || !checkName(userName)"
+                @click="submitFeedBack">Далее</UIButton>
         </div>
 
-        <PagesFeedBackMaps v-if="isShowMapsBlock && !isShowThanksBlock" @submit="submitMaps" />
+        <p v-if="+starsRate >= 4">тут будет редирект на страницу для хорошего отзыва</p>
+
+        <PagesFeedBackMaps v-if="isShowMapsBlock && !isShowThanksBlock" @submit="onMapsSelected" />
 
         <PagesFeedBackThanks v-if="isShowThanksBlock" />
     </div>
@@ -63,17 +66,31 @@ interface RateButton {
     selected: boolean,
 }
 
-const starsRate = ref<Number>(0);
+interface FeedbackRequestBody {
+    starsRate: number,
+    userName: string,
+    userEmail: string,
+    userComment: string,
+    selectedMaps: string[],
+    images: File[],
+}
 
-const rateButtons = reactive<Array<RateButton>>([]);
+const commonStore = useCommonStore();
+const userStore = useUserStore();
 
-const isRateButtonDisabled = ref<Boolean>(true);
+const starsRate = ref<number>(0);
+
+const rateButtons = reactive<RateButton[]>([]);
+
+const isRateButtonDisabled = ref<boolean>(true);
 
 const userName = ref<string>('');
 
 const userEmail = ref<string>('');
 
 const userComment = ref<string>('');
+
+const userMaps = ref<string[]>([]);
 
 const isShowNameIcon = ref<boolean>(false);
 
@@ -119,8 +136,61 @@ const submitFeedBack = () => {
     isShowMapsBlock.value = true;
 }
 
-const submitMaps = () => {
+const onMapsSelected = (maps: Array<string>) => {
+    userMaps.value = maps;
     isShowThanksBlock.value = true;
+
+    submit();
+}
+
+const submit = async () => {
+    const formData = new FormData();
+
+    formData.append('starsRate', starsRate.value.toString());
+    formData.append('userName', userName.value);
+    formData.append('userEmail', userEmail.value);
+    formData.append('userComment', userComment.value);
+
+    userMaps.value.forEach((map, index) => {
+        formData.append(`selectedMaps[${index}]`, map);
+    });
+
+    //@ts-ignore
+    commonStore.uploadedImages.forEach((image, index) => {
+        if (image !== null) {
+            try {
+                const blob = dataURLtoBlob(image);
+                formData.append(`image_${index}`, blob, `image_${index}.jpg`);
+            } catch (error) {
+                console.error(`Ошибка при преобразовании картинки image_${index}:`, error);
+            }
+        }
+    });
+
+    try {
+        const { data } = await $fetch(`/api/wp-json/user/bad_feedback?token=${userStore.token}`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        console.log('Отзыв отправлен успешно');
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
+const dataURLtoBlob = (dataURL: string): Blob => {
+    const byteString = atob(dataURL.split(',')[1]); // Декодируем данные из base64
+    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0]; // Получаем MIME-тип
+
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
 }
 </script>
 

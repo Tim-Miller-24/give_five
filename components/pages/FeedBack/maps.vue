@@ -7,17 +7,19 @@
         </div>
 
         <div class="maps__checks">
-            <UICheckbox>2Gis</UICheckbox>
-            <UICheckbox>Yandex карты</UICheckbox>
-            <UICheckbox>Google maps</UICheckbox>
+            <UICheckbox v-model="selected" value="2Gis">2Gis</UICheckbox>
+            <UICheckbox v-model="selected" value="Yandex карты">Yandex карты</UICheckbox>
+            <UICheckbox v-model="selected" value="Google maps">Google maps</UICheckbox>
         </div>
 
-        <UIButton class="maps__submit-button" @click="emits('submit')" color="purple">Отправить</UIButton>
+        <UIButton class="maps__submit-button" @click="emits('submit', selected)" color="purple">Отправить</UIButton>
     </div>
 </template>
 
 <script lang="ts" setup>
 const emits = defineEmits(['submit'])
+
+const selected = ref<Array<String>>();
 </script>
 
 <style lang="scss" scoped>

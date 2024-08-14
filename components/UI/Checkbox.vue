@@ -6,11 +6,11 @@
     <input
       type="checkbox"
       class="checkbox__input"
+      :checked="isChecked"
+      @change="handleChange"
     >
 
-    <span
-      class="checkbox__box"
-    />
+    <span class="checkbox__box" />
 
     <p>
       <slot />
@@ -18,13 +18,40 @@
   </label>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { computed } from 'vue'
+
 const props = defineProps({
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
+  value: {
+    type: [String, Number],
+    required: true,
+  },
   isAlignStart: {
     type: Boolean,
     default: false,
   }
 })
+
+const emit = defineEmits(['update:modelValue'])
+
+const isChecked = computed(() => {
+  return props.modelValue && props.modelValue.includes(props.value)
+})
+
+const handleChange = () => {
+  const newValue = [...props.modelValue]
+  if (isChecked.value) {
+    const index = newValue.indexOf(props.value)
+    newValue.splice(index, 1)
+  } else {
+    newValue.push(props.value)
+  }
+  emit('update:modelValue', newValue)
+}
 </script>
 
 <style lang="scss" scoped>
