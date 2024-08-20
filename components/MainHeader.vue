@@ -35,7 +35,8 @@
 
         <div class="header__image-box">
             <img v-if="isImage" :data-src="bgSource" v-lazy-load :loading="'lazy'" alt="" :key="'main-bg'">
-            <video v-else :src="bgSource" autoplay muted loop playsinline :key="'main-bg-video'"></video>
+            <video v-else :src="bgSource" autoplay muted loop playsinline :key="'main-bg-video'"
+                ref="videoElement"></video>
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
@@ -52,6 +53,10 @@ const userStore = useUserStore()
 const commonStore = useCommonStore();
 
 const isStoryOpened = ref<boolean>(false);
+const isScrolled = ref<boolean>(false);
+const isScrolledToBottom = ref<boolean>(false);
+
+const videoElement = ref(null);
 
 const props = defineProps({
     extraClass: {
@@ -66,7 +71,6 @@ const isImage = computed(() => {
     return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(bgSource.value);
 });
 
-const isScrolled = ref<boolean>(false);
 
 const userScroll = () => {
     if (window.scrollY > 20) {
@@ -74,12 +78,34 @@ const userScroll = () => {
     } else {
         isScrolled.value = false
     }
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY;
+
+    // Проверка, достиг ли пользователь низа страницы
+    if (windowHeight + scrollTop >= documentHeight) {
+        isScrolledToBottom.value = true;
+    } else {
+        isScrolledToBottom.value = false;
+    }
+
+    // Остановка или воспроизведение видео на основе положения прокрутки
+    if (isScrolledToBottom.value && videoElement.value) {
+        videoElement.value.pause();
+    } else if (videoElement.value) {
+        videoElement.value.play();
+    }
 };
 
 onMounted(() => {
     window.addEventListener("scroll", userScroll);
 
     nextTick(() => {
+        if (videoElement.value) {
+            videoElement.value.play();
+        }
+
         const observer = new MutationObserver(() => {
             const zuckModal = document.getElementById('zuck-modal-slider-stories');
             if (zuckModal) {
@@ -306,6 +332,7 @@ const closeStory = () => {
             height: 100%;
             min-height: 100vh;
         }
+
         &>video {
             margin: auto;
             object-fit: cover;
