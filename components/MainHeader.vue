@@ -2,20 +2,23 @@
     <div class="header" :class="props.extraClass">
         <div class="header__bar">
             <div class="header__bar-buttons" :class="{ 'blur': isScrolled && !isStoryOpened }">
-                <div class="header__bar-buttons_block" :class="{'d-none': isStoryOpened}">
-                    <UIIcon @click="userStore.isAuth ? navigateTo('/lk') : navigateTo('/login')" name="icon-user" class="icon-user"></UIIcon>
+                <div class="header__bar-buttons_block" :class="{ 'd-none': isStoryOpened }">
+                    <UIIcon @click="userStore.isAuth ? navigateTo('/lk') : navigateTo('/login')" name="icon-user"
+                        class="icon-user"></UIIcon>
                     <UIIcon name="icon-chat" @click="navigateTo('/chat')"></UIIcon>
                 </div>
 
-                <h1 class="header__title" @click="navigateTo('/')" :class="{'d-none': isStoryOpened}">ДАЙ 5</h1>
+                <h1 class="header__title" @click="navigateTo('/')" :class="{ 'd-none': isStoryOpened }">ДАЙ 5</h1>
 
-                <div class="header__bar-buttons_block" :class="{'d-none': isStoryOpened}">
+                <div class="header__bar-buttons_block" :class="{ 'd-none': isStoryOpened }">
                     <NuxtLink to="/lk/Notifications">
                         <UIIcon name="icon-notification"></UIIcon>
                     </NuxtLink>
 
                     <div class="coins" @click="navigateTo('/lk/bonuses')">
-                        <span> <LayoutHeaderBonuses /> </span>
+                        <span>
+                            <LayoutHeaderBonuses />
+                        </span>
                         <UIIcon name="icon-coin" class="icon-coin"></UIIcon>
                     </div>
                 </div>
@@ -23,7 +26,7 @@
                 <UIIcon class="ui-icon" v-if="isStoryOpened" @click="closeStory" id="custom-close-story" name="close" />
             </div>
 
-            <div class="header__bar-address" :class="{'d-none': isStoryOpened}">
+            <div class="header__bar-address" :class="{ 'd-none': isStoryOpened }">
                 <p>Urban Oasis Grill</p>
                 <span class="dot"></span>
                 <p>Москва, проспект Победы 35</p>
@@ -31,21 +34,24 @@
         </div>
 
         <div class="header__image-box">
-            <img :src="mainBg" :loading="'lazy'" alt="" :key="'main-bg'">
+            <img v-if="isImage" :data-src="bgSource" v-lazy-load :loading="'lazy'" alt="" :key="'main-bg'">
+            <video v-else :src="bgSource" autoplay muted loop playsinline :key="'main-bg-video'"></video>
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
 
-        <img :src="bgText" :loading="'lazy'" :key="'bg-text'" v-if="props.extraClass === 'index'" class="header__text" alt="">
+        <img :src="bgText" :loading="'lazy'" :key="'bg-text'" v-if="props.extraClass === 'index'" class="header__text"
+            alt="">
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import mainBg from '@/assets/images/header-banner-bg.png';
 import bgText from '@/assets/images/header-text.png';
 
 const userStore = useUserStore()
+const commonStore = useCommonStore();
 
-const isStoryOpened = ref(false);
+const isStoryOpened = ref<boolean>(false);
 
 const props = defineProps({
     extraClass: {
@@ -54,7 +60,13 @@ const props = defineProps({
     }
 })
 
-const isScrolled = ref();
+const bgSource = computed(() => commonStore.allSettings.logo.gr_logo_app.logo_header_desktop);
+
+const isImage = computed(() => {
+    return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(bgSource.value);
+});
+
+const isScrolled = ref<boolean>(false);
 
 const userScroll = () => {
     if (window.scrollY > 20) {
@@ -111,6 +123,7 @@ const closeStory = () => {
 .d-none {
     display: none !important;
 }
+
 #custom-close-story {
     z-index: 6000;
     position: fixed;
@@ -132,6 +145,7 @@ const closeStory = () => {
 
     border-radius: 50%;
 }
+
 .ui-icon {
     :deep svg path {
         fill: var(--white);
@@ -271,13 +285,13 @@ const closeStory = () => {
         min-height: 100vh;
         width: 100vw;
 
-        
+
         position: fixed;
         top: 0;
         left: 0;
         z-index: 8;
-        
-        & > img {
+
+        &>img {
             object-fit: cover;
             width: 100%;
             height: 100%;
