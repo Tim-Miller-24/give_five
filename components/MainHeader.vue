@@ -46,7 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import mainBg from '@/assets/images/header-banner-bg.png';
 import bgText from '@/assets/images/header-text.png';
 
 const userStore = useUserStore()
@@ -54,9 +53,9 @@ const commonStore = useCommonStore();
 
 const isStoryOpened = ref<boolean>(false);
 const isScrolled = ref<boolean>(false);
-const isScrolledToBottom = ref<boolean>(false);
 
-const videoElement = ref(null);
+const videoElement = ref<Element | null>();
+const mainBlock = ref<Element | null>();
 
 const props = defineProps({
     extraClass: {
@@ -79,19 +78,9 @@ const userScroll = () => {
         isScrolled.value = false
     }
 
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.scrollY;
+    const distanceFromTop = mainBlock.value?.getBoundingClientRect().top;
 
-    // Проверка, достиг ли пользователь низа страницы
-    if (windowHeight + scrollTop >= documentHeight) {
-        isScrolledToBottom.value = true;
-    } else {
-        isScrolledToBottom.value = false;
-    }
-
-    // Остановка или воспроизведение видео на основе положения прокрутки
-    if (isScrolledToBottom.value && videoElement.value) {
+    if (videoElement.value && distanceFromTop && distanceFromTop < 70) {
         videoElement.value.pause();
     } else if (videoElement.value) {
         videoElement.value.play();
@@ -118,6 +107,8 @@ onMounted(() => {
         observer.observe(document.body, { childList: true, subtree: true });
 
         const storyElements = document.querySelectorAll('.story');
+
+        mainBlock.value = document.querySelector('main.main');
 
         if (process.client) {
             for (let elem of storyElements) {
