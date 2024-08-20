@@ -80,7 +80,7 @@ const userScroll = () => {
 
     const distanceFromTop = mainBlock.value?.getBoundingClientRect().top;
 
-    if (videoElement.value && distanceFromTop && distanceFromTop < 70) {
+    if (videoElement.value && distanceFromTop && distanceFromTop < 100) {
         videoElement.value.pause();
     } else if (videoElement.value) {
         videoElement.value.play();
