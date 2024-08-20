@@ -11,7 +11,8 @@
                         showFlags: true,
                         showDialCodeInList: true,
                         showDialCodeInSelection: true,
-                        showSearchBox: true
+                        showSearchBox: true,
+                        placeholder: 'Выберите вашу страну'
                     }" :input-options="{
                         type: 'tel',
                         pattern: '[0-9]',
@@ -71,6 +72,21 @@ const phoneObj = ref<PhoneObj | null>(null)
 const code = ref<String | null>(null)
 const isCodeError = ref<Boolean>(false)
 const isLoading = ref<Boolean>(false)
+
+onMounted(() => {
+
+    nextTick(() => {
+        const observer = new MutationObserver(() => {
+            const countryListInput = document.querySelector('.vti__input.vti__search_box');
+
+            if (countryListInput) {
+                countryListInput.setAttribute('placeholder', 'Выберите вашу страну');
+            }
+        })
+
+        observer.observe(document.body, { childList: true, subtree: true });
+    })
+})
 
 watch(() => code.value, () => {
     isCodeError.value = false
@@ -269,6 +285,8 @@ const onSubmit = () => {
     .vti__dropdown-list {
         width: calc(100vw - 32px);
 
+        max-width: 736px;
+
         max-height: 270px;
 
         padding: 20px;
@@ -288,7 +306,7 @@ const onSubmit = () => {
 
         &.below {
             top: calc(100% + 12px);
-            left: -23px;
+            left: -25px;
         }
     }
 
@@ -299,6 +317,32 @@ const onSubmit = () => {
         margin: 0;
 
         border: 0;
+
+        &::-webkit-input-placeholder {
+            color: var(--white) !important;
+        }
+
+        &:-moz-placeholder {
+            color: var(--white) !important;
+            opacity: 1;
+        }
+
+        &::-moz-placeholder {
+            color: var(--white) !important;
+            opacity: 1;
+        }
+
+        &:-ms-input-placeholder {
+            color: var(--white) !important;
+        }
+
+        &::-ms-input-placeholder {
+            color: var(--white) !important;
+        }
+
+        &::placeholder {
+            color: var(--white) !important;
+        }
     }
 
     .vti__dropdown-item {

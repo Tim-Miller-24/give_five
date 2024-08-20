@@ -215,6 +215,8 @@ const dataURLtoBlob = (dataURL: string): Blob => {
     display: flex;
     flex-direction: column;
 
+    margin-bottom: 28px;
+
     align-items: center;
     justify-content: center;
 
@@ -266,8 +268,6 @@ const dataURLtoBlob = (dataURL: string): Blob => {
 .feedback {
     width: 100%;
     font-family: 'Overpass';
-
-    margin-top: 28px;
 
     display: flex;
     flex-direction: column;

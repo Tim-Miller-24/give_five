@@ -278,6 +278,10 @@ onBeforeUpdate(() => {
   border-radius: 8px;
   text-align: center;
   font-feature-settings: 'pnum' on, 'lnum' on;
+
+  &:valid {
+    padding-top: 2px;
+  }
 }
 
 .code-input > input:disabled {

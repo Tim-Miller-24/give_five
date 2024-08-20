@@ -12,7 +12,7 @@
 
             <PagesBonusesLevels />
 
-            <PagesBonusesHistory />
+            <!-- <PagesBonusesHistory /> -->
         </div>
 
     </div>

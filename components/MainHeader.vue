@@ -191,13 +191,15 @@ const closeStory = () => {
     &__bar {
 
         &-buttons {
+            max-width: 768px;
+            width: calc(100% - 40px);
+
             position: fixed;
-            left: 20px;
-            right: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             top: 20px;
 
             background: transparent;
-
 
             z-index: 2000;
 
@@ -205,9 +207,14 @@ const closeStory = () => {
             justify-content: space-between;
             align-items: center;
 
+            @include mq($bp-small) {
+                padding: 0 20px;
+            }
+
             &.blur {
+                top: 12px;
                 padding: 8px 20px;
-                margin: -8px -20px;
+                width: 100%;
                 backdrop-filter: blur(10px);
             }
 
@@ -293,6 +300,16 @@ const closeStory = () => {
 
         &>img {
             object-fit: cover;
+            margin: auto;
+            max-width: 768px;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+        }
+        &>video {
+            margin: auto;
+            object-fit: cover;
+            max-width: 768px;
             width: 100%;
             height: 100%;
             min-height: 100vh;
@@ -323,6 +340,10 @@ const closeStory = () => {
         left: 55%;
 
         z-index: 11;
+
+        @include mq($bp-small) {
+            left: 50%;
+        }
 
         transform: translate(-50%, -50%);
     }

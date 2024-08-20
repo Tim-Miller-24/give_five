@@ -35,7 +35,7 @@
 
     &__extra-info {
         font-family: 'Overpass';
-        color: #545757;
+        color: var(--white);
 
         & > a {
             border-bottom: 1px solid #545757;
