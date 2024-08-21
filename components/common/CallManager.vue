@@ -39,7 +39,7 @@
 
     padding: 24px;
 
-    width: 100%;
+    // width: 100%;
 
     gap: 16px;
 
