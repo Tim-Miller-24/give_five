@@ -13,17 +13,24 @@
                 <UIIcon class="ui-icon" name="scan-barcode" />
             </div>
             <div class="block__button" @click="share">
-                <p>Ссылка</p>
+                <p>Поделиться</p>
 
                 <UIIcon class="ui-icon" name="link" />
             </div>
+            <div class="block__button" style="flex-grow: 0; width: auto;" @click="copyCode(props.item.code)">
+                <UIIcon class="ui-icon" name="copy" />
+            </div>
+
+            <CommonNotification v-model:modelValue="notificationVisible" :message="'Промокод успешно скопирован'" />
         </div>
     </div>
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const config = useRuntimeConfig()
+
+const notificationVisible = ref<boolean>(false);
 
 const emits = defineEmits(['qrSelected'])
 
@@ -69,6 +76,17 @@ const share = async () => {
     console.warn('Web Share API не поддерживается');
   }
 };
+
+const copyCode = async (value: string) => {
+  try {
+    await copyTextToClipboard(value);
+
+    notificationVisible.value = true;
+
+  } catch (e) {
+    console.error(e);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

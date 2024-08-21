@@ -15,6 +15,12 @@
                         {{ declOfNum(balance, ['Бонус', 'Бонуса', 'Бонусов']) }}
                     </div>
                 </div>
+                <div class="levels__cashback">
+                <p>
+                    {{ currentLevel?.percentage / 100 }}% 
+                </p>
+                <div style="color: var(--grayText);">кэшбек</div>
+            </div>
             </div>
 
             <div class="levels__progress-block">
@@ -40,8 +46,6 @@
 </template>
 
 <script lang="ts" setup>
-import declOfNum from '@/utils/declOfNum'
-
 const userStore = useUserStore()
 const config = useRuntimeConfig();
 
@@ -129,13 +133,16 @@ onMounted(() => {
     color: var(--white);
 
     &__stage {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        justify-content: space-between;
         gap: 10px;
 
         font-family: 'Overpass';
 
         &>div {
+            flex-grow: 1;
             background: #EBEBEB33;
 
             padding: 12px 16px;

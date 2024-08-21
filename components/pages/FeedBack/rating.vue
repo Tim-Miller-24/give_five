@@ -11,6 +11,8 @@
             </div>
         </div>
 
+        <CommonCallManager v-if="+starsRate < 4 && !isRateButtonDisabled" class="rating__manager" />
+
         <div class="feedback" v-if="!isRateButtonDisabled && !isShowMapsBlock && !isShowThanksBlock && +starsRate < 4">
             <form class="feedback__form">
                 <div class="feedback__item">
@@ -52,7 +54,7 @@
                 @click="submitFeedBack">Далее</UIButton>
         </div>
 
-        <p v-if="+starsRate >= 4">тут будет редирект на страницу для хорошего отзыва</p>
+        <PagesFeedBackMaps v-if="+starsRate >= 4 && !isShowThanksBlock" @submit="onMapsSelected" />
 
         <PagesFeedBackMaps v-if="isShowMapsBlock && !isShowThanksBlock" @submit="onMapsSelected" />
 
@@ -204,6 +206,8 @@ const dataURLtoBlob = (dataURL: string): Blob => {
 
     background: #EBEBEB33;
 
+    gap: 20px;
+
     border: 1px solid #FFFFFF0D;
     border-radius: 16px;
 
@@ -214,8 +218,6 @@ const dataURLtoBlob = (dataURL: string): Blob => {
     position: relative;
     display: flex;
     flex-direction: column;
-
-    margin-bottom: 28px;
 
     align-items: center;
     justify-content: center;

@@ -5,7 +5,7 @@
                 <UIIcon name="wifi" />
                 <p>Название</p>
             </div>
-            <div class="data__right">
+            <div class="data__right" @click="copyCode(wifiLogin)">
                 <p>{{ wifiLogin }}</p>
                 <UIIcon name="copy" />
             </div>
@@ -16,11 +16,13 @@
                 <UIIcon name="key" />
                 <p>Пароль</p>
             </div>
-            <div class="data__right">
+            <div class="data__right" @click="copyCode(wifiPassword)">
                 <p>{{ wifiPassword }}</p>
                 <UIIcon name="copy" />
             </div>
         </div>
+
+        <CommonNotification v-model:modelValue="notificationVisible" :message="'Скопировано!'" />
 
         <button class="data__button">Подключить</button>
     </div>
@@ -29,9 +31,22 @@
 <script lang="ts" setup>
 const commonStore = useCommonStore();
 
-const wifiLogin = computed(() => commonStore.dai5.wifi_login);
+const notificationVisible = ref<boolean>(false);
 
-const wifiPassword = computed(() => commonStore.dai5.wifi_password);
+const wifiLogin = computed(() => commonStore.dai5?.wifi_login || '');
+
+const wifiPassword = computed(() => commonStore.dai5?.wifi_password || '');
+
+const copyCode = async (value: string) => {
+  try {
+    await copyTextToClipboard(value);
+
+    notificationVisible.value = true;
+
+  } catch (e) {
+    console.error(e);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -120,7 +120,7 @@ onMounted(() => {
     isFullscreen.value = true;
   }
   if (props.isQr) {
-    setSheetHeight(70);
+    setSheetHeight(80);
     isFullscreen.value = true;
   }
   draggableButton.value.addEventListener('mousedown', onDragStart)

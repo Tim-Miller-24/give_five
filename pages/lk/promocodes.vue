@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-const isQrOpened = ref(false)
+const isQrOpened = ref(false);
 
 const userStore = useUserStore()
 const config = useRuntimeConfig();
@@ -49,6 +49,18 @@ const qrImg = ref('');
 const modalData = ref();
 
 const openQr = (data) => {
+    if (isQrOpened.value) {
+        isQrOpened.value = false;
+
+        setTimeout(() => {
+            modalData.value = data
+            qrImg.value = data.qrcode
+            isQrOpened.value = true;
+        }, 1);
+
+        return;
+    }
+
     modalData.value = data
     qrImg.value = data.qrcode
     isQrOpened.value = true;
