@@ -7,8 +7,17 @@
 </template>
 
 <script setup lang="ts">
-const catalogStore = useCatalogStore();
 const commonStore = useCommonStore();
+const catalogStore = useCatalogStore();
+
+const route = useRoute();
+const router = useRouter();
+
+const { lounges, pickupLocations } = storeToRefs(commonStore);
+const { isShowProductModal, baseUrl } = storeToRefs(catalogStore);
+
+await commonStore.loadSettings();
+catalogStore.getCatalog();
 
 useHead({
   link: [
@@ -20,8 +29,27 @@ useHead({
   ]
 });
 
-commonStore.loadSettings();
-catalogStore.getCatalog();
+onMounted(() => {
+  if (!commonStore.selectedLocation) {
+    useChangeLocation('pickup', pickupLocations.value('pickup')[0]);
+  }
+})
+
+watch(isShowProductModal, val => {
+  if (!val) {
+    if (baseUrl.value) {
+      window.history.replaceState(null, '', baseUrl.value);
+      return;
+    } else {
+      const pre = route.matched[0].path;
+      const basePath = pre.split(':')[0];
+      const uri = route.name === 'menu-categories-subcategory-product'
+          ? `${route.params.categorySlug}/${route.params.subCategorySlug}` : `${route.params.categorySlug || ''}`;
+      router.replace({path: `${basePath}${uri || ''}`});
+    }
+  }
+});
+
 
 commonStore.getPickups();
 commonStore.getDelivery();

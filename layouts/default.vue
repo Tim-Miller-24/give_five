@@ -7,10 +7,13 @@
 
             <LayoutFooter v-if="route.name === 'index'" />
         </div>
+
+        <LazyModalsProduct v-if="catalogStore.isShowProductModal" />
     </div>
 </template>
 
 <script setup lang="ts">
+const catalogStore = useCatalogStore();
 const route = useRoute();
 
 const headerExtraClass = computed(() => route.name === 'index' ? 'index' : '')

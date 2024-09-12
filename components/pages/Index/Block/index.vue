@@ -128,6 +128,9 @@ const onMenuClick = () => {
     if (isMenuPdf.value) {
         window.open(menuUrl.value, '_blank');
     }
+    else {
+        navigateTo('/catalog/');
+    }
 }
 </script>
 
