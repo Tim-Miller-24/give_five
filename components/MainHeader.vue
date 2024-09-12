@@ -108,7 +108,7 @@ onMounted(() => {
 
         const storyElements = document.querySelectorAll('.story');
 
-        mainBlock.value = document.querySelector('main.main');
+        mainBlock.value = document.querySelector('.layout-content');
 
         if (process.client) {
             for (let elem of storyElements) {

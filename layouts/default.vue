@@ -1,6 +1,6 @@
 <template>
     <div class="layout-default">
-        <div class="container">
+        <div class="container layout-content">
             <MainHeader :extra-class="headerExtraClass" />
 
             <slot />
