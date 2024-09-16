@@ -18,8 +18,10 @@
   
   const catalogStore = useCatalogStore();
   const commonStore = useCommonStore();
+
   const { currentCategoryId, currentSubCategoryId, catalog, productSlug, slugProduct } = storeToRefs(catalogStore);
   currentCategoryId.value = 0;
+  
   currentSubCategoryId.value = 0;
   const isTemplates = computed(() => commonStore.facade?.catalog_front);
   

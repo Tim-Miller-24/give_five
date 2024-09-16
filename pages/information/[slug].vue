@@ -29,15 +29,26 @@ const { slug } = route.params;
 try {
     data.value = await commonStore.getInfoPage(slug, config);
 
-    const response = data?.value?.value || null
+    let response = data?.value?.value || null
 
-    if (response) {
+    if (response.length) {
         content.value = response[0]?.content?.rendered;
 
         title.value = response[0]?.title?.rendered;
 
         // useHead({ title: [`${response[0]?.title?.rendered}`] })
     } else {
+        data.value = await commonStore.getPost(slug, config);
+
+        response = data?.value?.value || null
+
+        if (response) {
+            content.value = response[0]?.content?.rendered;
+
+            title.value = response[0]?.title?.rendered;
+
+            // useHead({ title: [`${response[0]?.title?.rendered}`] })
+        }
     }
 
 } catch (err) { console.log(err); }
@@ -57,6 +68,8 @@ try {
         align-items: center;
 
         text-transform: uppercase;
+
+        text-wrap: nowrap;
 
         position: relative;
 

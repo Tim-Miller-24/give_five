@@ -8,7 +8,7 @@
 const commonStore = useCommonStore();
 const catalogStore = useCartStore();
 
-const banners = computed(() => commonStore.slidesGallery);
+const banners = computed(() => commonStore.stories);
 
 
 onMounted(() => {
@@ -58,8 +58,8 @@ onMounted(() => {
                         length: (+item.screen_time / 1000) || 3,
                         src: item.image ? item.image : item.stories_video.url,
                         preview: item.preview || item.image,
-                        // link: checkLink(item), // Добавляем ссылку
-                        // linkText: item.text_button || 'Подробнее', // Текст кнопки
+                        link: checkLink(item), // Добавляем ссылку
+                        linkText: item.text_button || 'Подробнее', // Текст кнопки
                         time: item?.time || 0,
                         seen: false,
                     };
@@ -72,28 +72,32 @@ onMounted(() => {
     });
 });
 
-// const checkLink = (item) => {
-//     if (item) {
-//         if (item.type === 'product') {
-//             // catalogStore.setProduct(item.product);
+const checkLink = (item) => {
+    if (item) {
+        if (item.type === 'product') {
+            // catalogStore.setProduct(item.product);
 
-//             // let temp = catalogStore.getProductById(item.product);
+            // let temp = catalogStore.getProductById(item.product);
 
-//             // router.push(`${temp.slug}`);
-//             return '/?product_id=' + item.product;
-//         }
+            // router.push(`${temp.slug}`);
+            return '/?product_id=' + item.product;
+        }
 
-//         if (item.type === 'category') {
-//             let temp = catalogStore.categories?.find(cat => +cat.id === +item.category);
+        if (item.type === 'category') {
+            let temp = catalogStore.categories?.find(cat => +cat.id === +item.category);
 
-//             // router.push(`/menu/${temp.slug}`);
-//             return '/' + item.category;
-//         }
+            // return `/catalog/menu/${temp.slug}`;
+            // return '/' + item.category;
+        }
 
-//         // router.push(`${item.link}`);
-//         return item.url;
-//     }
-// }
+        if (item.type === 'text') {
+            return '/information/' + item.post.post_slug
+        }
+
+        // router.push(`${item.link}`);
+        return item.url;
+    }
+}
 
 </script>
 

@@ -72,6 +72,7 @@ export const useCommonStore = defineStore('commonStore', {
     slidesGallery: [], //Баннеры по складам
     slidesGallery1: [], // galery_1
     slidesGallery2: [], // galery_2
+    stories: [],
     categoriesMenuTitle: '',
 
     logoFabrics: [], //набор логотипов и фавиконов
@@ -261,6 +262,8 @@ export const useCommonStore = defineStore('commonStore', {
           this.slidesGallery1 = this.setSlides('gallery_1', obj);
 
           this.slidesGallery2 = this.setSlides('gallery_2', obj);
+
+          this.stories = this.allSettings?.banners.filter(banner => banner?.is_stories && banner?.device === 'site');
         }
       }
       else//баннеры из своего запроса
@@ -278,6 +281,8 @@ export const useCommonStore = defineStore('commonStore', {
           this.slidesGallery1 = this.setSlides('gallery_1', obj);
           
           this.slidesGallery2 = this.setSlides('gallery_2', obj);
+
+          this.stories = this.allSettings?.banners.filter(banner => banner?.is_stories && banner?.device === 'site');
         }
       }
     },

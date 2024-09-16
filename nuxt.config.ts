@@ -145,5 +145,30 @@ export default defineNuxtConfig({
     options: {}
   },
 
+  hooks: {
+    'pages:extend' (pages) {
+      pages.push({
+        name: 'catalog-menu-categories',
+        path: '/catalog/menu/:categorySlug',
+        file: '~/components/MenuCategories.vue'
+      });
+      pages.push({
+        name: 'catalog-menu-categories-subcategory',
+        path: '/catalog/menu/:categorySlug/:subCategorySlug',
+        file: '~/components/MenuCategoriesSubcategory.vue'
+      });
+      pages.push({
+        name: 'catalog-menu-categories-subcategory-product',
+        path: '/catalog/menu/:categorySlug/:subCategorySlug/:slugProduct',
+        file: '~/components/MenuCategoriesSubcategoryProduct.vue'
+      });
+      pages.push({
+        name: 'home',
+        path: '/:slug',
+        file: '~/pages/index.vue'
+      });
+    }
+  },
+
   compatibilityDate: '2024-07-24',
 })
