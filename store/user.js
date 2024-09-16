@@ -177,6 +177,24 @@ export const useUserStore = defineStore("userStore", {
       return data;
     },
 
+    async SendCodeForTelegram(obj, config) {
+      const { data } = await useFetch(`${config.public.BASE_URL}/wp-json/telega/v1/auth/send`, {
+        method: 'POST',
+        body: obj
+      })
+
+      return data;
+    },
+
+    async CheckCodeForTelegram(obj, config) {
+      const { data } = await useFetch(`${config.public.BASE_URL}/wp-json/telega/v1/auth/check`, {
+        method: 'POST',
+        body: obj
+      })
+
+      return data;
+    },
+
     async getBalance(config) {
       const { data } = await useFetch(`${config.public.BASE_URL}/wp-json/systeminfo/v1/bonus`, {
         query: {

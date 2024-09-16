@@ -12,7 +12,7 @@
             <p class="variant__name">Войти через Вконтакте</p>
         </NuxtLink>
 
-        <NuxtLink class="variant__block">
+        <NuxtLink class="variant__block" to="/login/telegram">
             <UIIcon class="ui-icon" color="white" name="telegram" />
 
             <p class="variant__name">Вход через Telegram</p>
