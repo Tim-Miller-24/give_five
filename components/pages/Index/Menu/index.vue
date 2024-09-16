@@ -57,6 +57,8 @@ watch(hasSubCategories, val => val ? currentSubCategoryId.value = block.value.su
 
 .index-menu {
   overflow: hidden;
+  margin-left: -20px;
+  margin-right: -20px;
 
   &__categories {
     margin-bottom: 30px;
@@ -69,6 +71,7 @@ watch(hasSubCategories, val => val ? currentSubCategoryId.value = block.value.su
   &__content {
     display: flex;
     flex-direction: column;
+    
   }
 
   &__block {

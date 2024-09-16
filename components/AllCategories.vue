@@ -1,6 +1,7 @@
 <template>
   <div v-for="category in categories"
       :key="category.id"
+      :class="{'block-slider': category.id === 140 || category.id === 16}"
     >
     <div :id="`block_${category.id}`"
       class="index-menu__block"
@@ -206,10 +207,18 @@ const filterSubProducts = (subcategoryProducts) => {
     width: 100%;
 
     overflow: visible;
+
+    display: flex;
   }
 
   &__slide {
     width: 212px;
+    
+    height: 100%;
+
+    & .index-menu-card {
+      height: 100%;
+    }
 
     @include mq($bp-small) {
       width: 316px;
@@ -232,7 +241,7 @@ const filterSubProducts = (subcategoryProducts) => {
 
     background: var(--white);
     border-radius: 14px;
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--purple);
 
     cursor: pointer;
 

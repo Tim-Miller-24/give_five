@@ -343,7 +343,7 @@ const productUrl = computed(() => {
   // })
 
   //берём урл товара из поля url
-  let newUrl = `/menu` + props.item?.url || '';
+  let newUrl = `/catalog/menu` + props.item?.url || '';
 
   nextTick(() => {
     if ((window?.location?.pathname)?.includes('menu')) {

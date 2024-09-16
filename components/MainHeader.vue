@@ -34,8 +34,10 @@
         </div>
 
         <div class="header__image-box">
-            <img v-if="isImage" :data-src="bgSource" v-lazy-load :loading="'lazy'" alt="" :key="'main-bg'">
-            <video v-else :src="bgSource" autoplay muted loop playsinline :key="'main-bg-video'"
+            <img v-if="isImage" :data-src="bgSource" v-lazy-load :loading="'lazy'"
+            alt="" :key="'main-bg'">
+            <video v-else :data-src="bgSource" v-lazy-load :loading="'lazy'"
+            autoplay muted loop playsinline :key="'main-bg-video'"
                 ref="videoElement"></video>
             <div class="gray-frame" :class="props.extraClass"></div>
         </div>
@@ -83,14 +85,13 @@ watch(() => route.name, () => {
 
 
 const userScroll = () => {
-    if (route.name !== 'index') return;
-    
     if (window.scrollY > 20) {
         isScrolled.value = true;
     } else {
         isScrolled.value = false
     }
-
+    
+    if (route.name !== 'index') return;
     const distanceFromTop = mainBlock.value?.getBoundingClientRect().top;
 
     if (videoElement.value && distanceFromTop && distanceFromTop < 100) {
@@ -102,6 +103,9 @@ const userScroll = () => {
 
 onMounted(() => {
     window.addEventListener("scroll", userScroll);
+
+    commonStore.getPickups();
+    commonStore.getDelivery();
 
     nextTick(() => {
         if (videoElement.value) {

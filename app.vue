@@ -20,19 +20,19 @@ await commonStore.loadSettings();
 catalogStore.getCatalog();
 
 useHead({
-  link: [
-    { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/zuck.css" }, 
-    { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/skins/snapgram.css" }
-  ],
-  script: [
-    { src: 'https://unpkg.com/zuck.js/dist/zuck.js' },
-  ]
-});
+    link: [
+      { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/zuck.css" }, 
+      { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/skins/snapgram.css" }
+    ]
+  });
+
 
 onMounted(() => {
   if (!commonStore.selectedLocation) {
     useChangeLocation('pickup', pickupLocations.value('pickup')[0]);
   }
+
+  commonStore.getDeliveryTimes();
 })
 
 watch(isShowProductModal, val => {
@@ -52,8 +52,7 @@ watch(isShowProductModal, val => {
 
 
 commonStore.getPickups();
-commonStore.getDelivery();
-commonStore.getDeliveryTimes();
+
 commonStore.getMenu();
 
 commonStore.getBanners();
