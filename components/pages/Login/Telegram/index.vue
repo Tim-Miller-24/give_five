@@ -205,8 +205,6 @@ const checkCodeForTelegram = async () => {
 
   const data = await userStore.CheckCodeForTelegram(obj, config);
 
-  console.log(data.value);
-
   isLoading.value = false
 
   if (data?.value?.success) {
