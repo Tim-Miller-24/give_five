@@ -1,6 +1,6 @@
 <template>
     <div class="qr">
-        <img :data-src="image" alt="" v-lazy-load>
+        <img :data-src="image" alt="" v-lazy-load :key="'wifi-image'">
 
         <h3 class="qr__title">Мы будем рады поделиться <br> wi-fi с вами</h3>
     </div>

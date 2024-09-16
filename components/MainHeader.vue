@@ -51,6 +51,8 @@ import bgText from '@/assets/images/header-text.png';
 const userStore = useUserStore()
 const commonStore = useCommonStore();
 
+const route = useRoute();
+
 const isStoryOpened = ref<boolean>(false);
 const isScrolled = ref<boolean>(false);
 
@@ -70,8 +72,19 @@ const isImage = computed(() => {
     return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(bgSource.value);
 });
 
+watch(() => route.name, () => {
+    console.log(route.name);
+    if (route.name === 'index') {
+        videoElement.value.play();
+    } else {
+        videoElement.value.pause();
+    }
+})
+
 
 const userScroll = () => {
+    if (route.name !== 'index') return;
+    
     if (window.scrollY > 20) {
         isScrolled.value = true;
     } else {
