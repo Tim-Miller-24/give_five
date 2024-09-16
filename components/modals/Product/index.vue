@@ -169,8 +169,8 @@ const onSlideChange = (swiper) => {
       domSlider.value.style.height = `${slide.children[0].offsetHeight + 50}px`;
     }
   
-    console.log(slide.children[0].offsetHeight);
-    console.log('----- dom slider after height:' + domSlider.value.offsetHeight);
+    // console.log(slide.children[0].offsetHeight);
+    // console.log('----- dom slider after height:' + domSlider.value.offsetHeight);
   
     activeSlideId.value = +slide.id.match(/\d+$/)[0];
   

@@ -75,7 +75,6 @@ const isImage = computed(() => {
 });
 
 watch(() => route.name, () => {
-    console.log(route.name);
     if (route.name === 'index') {
         videoElement.value.play();
     } else {
@@ -108,7 +107,7 @@ onMounted(() => {
     commonStore.getDelivery();
 
     nextTick(() => {
-        if (videoElement.value) {
+        if (videoElement.value && route.name === 'index') {
             videoElement.value.play();
         }
 

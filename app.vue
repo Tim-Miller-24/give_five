@@ -19,6 +19,16 @@ const { isShowProductModal, baseUrl } = storeToRefs(catalogStore);
 await commonStore.loadSettings();
 catalogStore.getCatalog();
 
+const setWindowStore = () => {
+  // commonStore.isMobile = window.innerWidth < 700;
+
+  commonStore.setIsMobileOrTablet(window.innerWidth < 700);
+  commonStore.isTablet = window.innerWidth < 992 && window.innerWidth >= 768;
+
+  const doc = document.documentElement;
+  doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+};
+
 useHead({
     link: [
       { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/zuck.css" }, 
@@ -28,6 +38,8 @@ useHead({
 
 
 onMounted(() => {
+  setWindowStore();
+  
   if (!commonStore.selectedLocation) {
     useChangeLocation('pickup', pickupLocations.value('pickup')[0]);
   }
