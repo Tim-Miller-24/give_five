@@ -86,6 +86,12 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap"
   ],
 
+  pwa: {
+    workbox: {
+      importScripts: ['/service-worker.js'],
+    },
+  },
+
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 365 , // Время жизни куки в секундах (сейчас стоит год)

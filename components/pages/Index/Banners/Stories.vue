@@ -7,102 +7,112 @@
 <script setup>
 const commonStore = useCommonStore();
 const catalogStore = useCartStore();
+const config = useRuntimeConfig();
 
 const banners = computed(() => commonStore.stories);
 
+// Метод для предварительного кеширования изображений и видео
+async function cacheMedia(urls) {
+    if ('caches' in window) {
+        const cache = await caches.open('stories-media-cache');
+        await Promise.all(urls.map(url => {
+            console.log('Caching:', url); // Логирование URL-адресов
+            return fetch(url).then(response => {
+                if (response.ok) {
+                    return cache.put(url, response);
+                }
+            });
+        }));
+    }
+}
 
-onMounted(() => {
-    nextTick(() => {
-        const options = {
-            localStorage: false,
+onMounted(async () => {
+    await nextTick();
+
+    const options = {
+        localStorage: false,
+    };
+
+    const element = document.querySelector("#stories");
+    const stories = new Zuck(element, options);
+
+    function generateUniqueId() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+
+    const createdIds = new Set();
+    const mediaUrls = new Set(); // Для хранения URL медиа-ресурсов
+
+    for (let slide of banners.value) {
+        const storyId = generateUniqueId();
+
+        const story = {
+            id: storyId,
+            photo: slide.image,
+            name: '',
+            link: '',
+            lastUpdated: '',
+            time: 0,
+            seen: false,
         };
 
-        const element = document.querySelector("#stories");
-        const stories = new Zuck(element, options);
+        stories.add(story);
+        createdIds.add(storyId);
 
-        // Функция для генерации уникальных id
-        function generateUniqueId() {
-            return Math.random().toString(36).substr(2, 9); // Генерируем случайную строку
-        }
+        if (slide.inner_banners && slide.inner_banners.length > 0) {
+            for (let item of slide.inner_banners.reverse()) {
+                const itemStoryId = generateUniqueId();
 
-        // Переменная для хранения созданных id
-        const createdIds = new Set();
+                const storyItem = {
+                    id: itemStoryId,
+                    type: item.image ? 'photo' : 'video',
+                    length: (+item.screen_time / 1000) || 3,
+                    src: item.image ? item.image : item.stories_video.url,
+                    preview: item.preview || item.image,
+                    link: checkLink(item),
+                    linkText: item.text_button || 'Подробнее',
+                    time: item?.time || 0,
+                    seen: false,
+                };
 
-        // Добавляем основные истории
-        for (let slide of banners.value) {
-            // Проверяем условие перед добавлением
-            const storyId = generateUniqueId(); // Генерируем уникальный id для каждой истории
+                stories.addItem(story.id, storyItem);
+                createdIds.add(itemStoryId);
 
-            const story = {
-                id: storyId,
-                photo: slide.image,
-                name: '',
-                link: '',
-                lastUpdated: '',
-                time: 0,
-                seen: false,
-            };
-
-            stories.add(story);
-            createdIds.add(storyId);
-
-            // Добавляем внутренние баннеры, если они есть
-            if (slide.inner_banners && slide.inner_banners.length > 0) {
-                for (let item of slide.inner_banners.reverse()) {
-                    const itemStoryId = generateUniqueId(); // Генерируем уникальный id для каждого элемента
-
-                    const storyItem = {
-                        id: itemStoryId,
-                        type: item.image ? 'photo' : 'video',
-                        // length: 300,
-                        length: (+item.screen_time / 1000) || 3,
-                        src: item.image ? item.image : item.stories_video.url,
-                        preview: item.preview || item.image,
-                        link: checkLink(item), // Добавляем ссылку
-                        linkText: item.text_button || 'Подробнее', // Текст кнопки
-                        time: item?.time || 0,
-                        seen: false,
-                    };
-
-                    stories.addItem(story.id, storyItem); // Добавляем элемент к основной истории
-                    createdIds.add(itemStoryId);
+                // Добавляем URL медиа-ресурсов в набор
+                if (item.image) {
+                    mediaUrls.add(item.image.replace(config.public.BASE_URL, '/api'));
+                } else if (item.stories_video.url) {
+                    mediaUrls.add(item.stories_video.url.replace(config.public.BASE_URL, '/api'));
                 }
             }
         }
-    });
+    }
+
+    // Кешируем медиа-ресурсы
+    await cacheMedia([...mediaUrls]);
 });
 
 const checkLink = (item) => {
     if (item) {
         if (item.type === 'product') {
-            // catalogStore.setProduct(item.product);
-
-            // let temp = catalogStore.getProductById(item.product);
-
-            // router.push(`${temp.slug}`);
             return '/?product_id=' + item.product;
         }
 
         if (item.type === 'category') {
             let temp = catalogStore.categories?.find(cat => +cat.id === +item.category);
-
-            // return `/catalog/menu/${temp.slug}`;
-            // return '/' + item.category;
+            return '/' + item.category;
         }
 
         if (item.type === 'text') {
-            return '/information/' + item.post.post_slug
+            return '/information/' + item.post.post_slug;
         }
 
-        // router.push(`${item.link}`);
         return item.url;
     }
-}
-
+};
 </script>
 
 <style lang="scss">
-
 #zuck-modal {
     z-index: 1000;
 }
