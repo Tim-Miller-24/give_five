@@ -118,9 +118,10 @@ const checkLink = (item) => {
 }
 
 #zuck-modal-content .story-viewer .tip {
-    background: var(--yellow) !important;
-    padding-top: 10px;
+    background: var(--purple) !important;
+    padding-top: 7px;
     padding-bottom: 6px;
+    border-radius: 8px;
     color: var(--white);
 }
 
