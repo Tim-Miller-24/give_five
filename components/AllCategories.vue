@@ -206,7 +206,7 @@ const filterSubProducts = (subcategoryProducts) => {
   &__slider {
     width: 100%;
 
-    height: 370px; // временный костыль
+    // height: 370px; // временный костыль
 
     overflow: visible;
 
