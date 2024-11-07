@@ -33,7 +33,12 @@ useHead({
     link: [
       { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/zuck.css" }, 
       { rel: "stylesheet", href:"https://unpkg.com/zuck.js/dist/skins/snapgram.css" }
-    ]
+    ],
+    meta: [
+      { name: "title", content: 'Дай пять!'},
+      { name: "description", content: 'Дай пять! Онлайн меню'},
+      { name: "keywords", content: 'Дай пять!'},
+    ],
   });
 
 
